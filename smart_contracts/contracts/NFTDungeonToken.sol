@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: UNLICENSED
 
-pragma solidity ^0.6.7;
+pragma solidity ^0.8.0;
 
 
 interface ERC20 {
@@ -18,7 +18,7 @@ interface ERC20 {
 // this is the basics of creating an ERC20 token
 //change the name loeker to what ever you would like
 
-contract NFTDungeon is ERC20 {
+contract NFTDungeonToken is ERC20 {
     string public constant symbol = "NFTD";
     string public constant name = "NFT Dungeon";
     uint8 public constant decimals = 18;

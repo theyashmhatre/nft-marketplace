@@ -1,4 +1,4 @@
-import { TransactionContext } from "../context/TransactionContext";
+import { WalletContext } from "../context/WalletContext";
 
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si"
@@ -17,24 +17,24 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
         type={type}
         step="0.0001"
         value={value}
-        onChange={(e) => { handleChange(e, name) }}
+        // onChange={(e) => { handleChange(e, name) }}
         className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
     />
 );
 
 const Welcome = () => {
 
-    const { connectWallet, currentAccount, formData, handleChange, sendTransaction, isLoading } = useContext(TransactionContext);
+    const { connectWallet, currentAccount} = useContext(WalletContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const {addressTo, amount, keyword, message} = formData;
-        console.log(formData);
+        // const {addressTo, amount, keyword, message} = formData;
+        // console.log(formData);
 
-        if (!addressTo || !amount || !keyword || !message) return;
+        // if (!addressTo || !amount || !keyword || !message) return;
 
-        sendTransaction();
+        // sendTransaction();
     }
 
     return (
@@ -102,17 +102,11 @@ const Welcome = () => {
                     </div>
 
                     <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-                        <Input placeholder="Address To" name="addressTo" type="text" handleChange={handleChange} />
-                        <Input placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange} />
-                        <Input placeholder="Keyword (Gif)" type="text" name="keyword" handleChange={handleChange} />
-                        <Input placeholder="Enter Message" name="message" type="text" handleChange={handleChange} />
 
                         <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-                        {isLoading ?
-                            (<Loader />)
-                            :
-                            (<div>
+                        
+                        <div>
                                 <button
                                     type="button"
                                     onClick={handleSubmit}
@@ -120,7 +114,7 @@ const Welcome = () => {
                                 >
                                     Send Now
                                 </button>
-                            </div>)}
+                            </div>
 
                     </div>
 
