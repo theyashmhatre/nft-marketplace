@@ -2,13 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import {TransactionProvider} from './context/TransactionContext';
+import {WalletProvider} from './context/WalletContext';
+import { MarketplaceProvider } from './context/MarketplaceContext';
 
 ReactDOM.render(
-  <TransactionProvider>
-    <React.StrictMode>
+  <WalletProvider>
+    <MarketplaceProvider>
+      <React.StrictMode>
       <App />
     </React.StrictMode>
-  </TransactionProvider>,
+    </MarketplaceProvider>
+  </WalletProvider>,
   document.getElementById('root')
 )
