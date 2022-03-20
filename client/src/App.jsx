@@ -3,6 +3,7 @@ import {Navbar, Welcome, Services, Footer, Transactions} from'./components';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import CreateNFT from './components/CreateNFT';
+import Singlenft from './components/Singlenft';
 
 const App = () => {
 
@@ -16,7 +17,9 @@ const App = () => {
             <Routes>
                   <Route path='/' element={<Home />} />
                   <Route exact path='/create' element={<CreateNFT />} />
-              </Routes>
+                  <Route exact path ='/Singlenft' element={<Singlenft/>} />
+                  
+             </Routes>
 
             <Footer />
         </div>
