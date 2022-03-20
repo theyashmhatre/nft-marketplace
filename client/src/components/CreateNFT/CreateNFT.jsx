@@ -1,13 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FcAddImage } from "react-icons/fc";
 import { MarketplaceContext } from '../../context/MarketplaceContext';
 import { Buffer } from 'buffer';
-import {ImageUpload, MetadataUpload, TransactionApprove, NFTCreate} from './ModalContent';
+import {ImageUpload, MetadataUpload, TransactionApprove, NFTCreate} from './Modal/ModalContent';
+import { WalletContext } from '../../context/WalletContext';
+import Modal from './Modal/Modal';
+import ListNft from './Modal/ModalContent/ListNft';
 
 export default function CreateNFT() {
 
-  const { itemDetails, setItemDetails, createItems, fetchNFTs, uploadStatus } = useContext(MarketplaceContext);
+  const { itemDetails, setItemDetails, createItem, fetchNFTs, uploadStatus } = useContext(MarketplaceContext);
+  const {isChainValid} = useContext(WalletContext);
   const [submit, setSubmit] = useState(false);
+  const [listNft, setListNft] = useState(false);
 
   function handleChange(e) {
     const value = e.target.value;
@@ -46,7 +51,7 @@ export default function CreateNFT() {
     e.preventDefault();
     setSubmit(true);
 
-    createItems();
+    createItem(listNft);
   };
 
   const closeModal = () => {
@@ -54,12 +59,14 @@ export default function CreateNFT() {
     setItemDetails({
       image: { preview: "", raw: "", visible: false, file: '' }, name: "", extlink: "", description: "", price: ""
     });
-  };
+  }; 
+  
 
 
   return (
     <div className='gradient-bg-welcome'>
       <div className='flex flex-col sm:w-2/3 m-auto w-full justify-center h-full'>
+      {!isChainValid && <Modal />}
 
         <form className='mt-10'>
           <label className='text-2xl sm:text-5xl font-bold py-1 text-white'>Create New Item</label>
@@ -94,9 +101,29 @@ export default function CreateNFT() {
           <label for="description" className="block mb-2 text-sm text-white font-bold mt-5">Description</label>
           <textarea name="description" onChange={handleChange} id="description" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Provide a detailed description of your item."></textarea>
 
-          <label for="price" className="block text-sm text-white font-bold mb-2 mt-5">Price</label>
-          <input onChange={handleChange} className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" type="number" placeholder="Item Price" />
+          {/* Toggle Button */}
+          <div class="flex w-full my-12 mx-5">
+            <label
+              for="toogleA"
+              class="flex items-center cursor-pointer"
+            >
+              <div class="relative">
+                <input id="toogleA" type="checkbox" className="sr-only" onClick={() => setListNft(!listNft)} />
+                <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                <div className={`dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition ease-out duration-500 ${listNft ? "translate-x-full" : "" }`}></div>
+              </div>
+              <div class="ml-3 text-white font-semibold text-lg">
+                List NFT for sale
+              </div>
+            </label>
 
+          </div>
+
+          {listNft ? (<div>
+            <label for="price" className="block text-sm text-white font-bold mb-2 mt-5">Price</label>
+            <input onChange={handleChange} className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" type="number" placeholder="Item Price" />
+          </div>) : <></>}
+          
           <button onClick={onSubmit} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">Create</button>
         </form>
 
@@ -119,9 +146,12 @@ export default function CreateNFT() {
                   {/* Accepting transaction */}
                   <TransactionApprove />
 
+
                   {/* Creating NFT on blockchain*/}
                   <NFTCreate />
 
+                  {/* Listing NFT on Market*/}
+                  {listNft && <ListNft />}
                 
                 </div>
 
