@@ -2,8 +2,8 @@ import { useState } from 'react'
 import {Navbar, Welcome, Services, Footer, Transactions} from'./components';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
-import CreateNFT from './components/CreateNFT';
 import Singlenft from './components/Singlenft';
+import CreateNFT from './components/CreateNFT/CreateNFT';
 
 const App = () => {
 

@@ -4,8 +4,6 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si"
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineContentCopy} from "react-icons/md";
-
-import { Loader } from './';
 import { useContext } from "react";
 import { shortenAddress } from "../utils/shortnerAddress";
 

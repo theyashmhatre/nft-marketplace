@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -228,6 +228,24 @@
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "createMarketItem",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
 				"name": "createMarketSale",
@@ -256,7 +274,7 @@
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -796,11 +814,11 @@
 			]
 		},
 		"contracts/NFTMarketplace.sol": {
-			"keccak256": "0x4a7fc638334710c94edfcb475525b6800b83d932976c58762c76d3bb876b5665",
+			"keccak256": "0xc645b1d850da1e1b6dd584b1ececc0582848a88012a47ff35b2825890afe01ff",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://a27eefc040ca05c18be3e0991e5978f25631b0f13386274fca1fe550c9a8ff3b",
-				"dweb:/ipfs/QmUu2hk1mfjmSv2FrGiiu1m9FWDguvh1LmL4USq65sCqqx"
+				"bzz-raw://004a77947d578fbbe0a7a0261a94213093e60836c152e59ba46385675d383364",
+				"dweb:/ipfs/QmSdCSFiBafvWJhCHH6W22rBdjM8eDT9tpagDQN4bXuod9"
 			]
 		},
 		"hardhat/console.sol": {
