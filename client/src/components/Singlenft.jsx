@@ -5,7 +5,7 @@ import "./Singlenft.css";
 
 
 const nftAbout = () => {
-  const [details , setDetails] = useState(false);
+  const [details , setDetails] = useState(true);
   const [bid , setBid] = useState(false);
   const [history , setHistory] = useState(false);
 
@@ -50,11 +50,15 @@ const nftAbout = () => {
                   details ?"border-white text-white":" border-gray-500 text-gray-500 hover:text-white hover:border-white")}>
                     <button onClick={()=> {
                       setDetails(!details)
+                      setBid(bid)
+                      setHistory(history)
                     }} className="font-bold">Details</button>
                   </li>
                   <li className={classNames(" mx-3  rounded-t-lg border-b-2  inline-block", bid? "border-white text-white":" border-gray-500 text-gray-500 hover:text-white hover:border-white" )}>
                     <button onClick={()=>{
-                      setBid(!bid)
+                         setDetails(details)
+                         setBid(!bid)
+                         setHistory(history)
                     }} className="font-bold">
                       Bids
                     </button>
@@ -62,6 +66,8 @@ const nftAbout = () => {
                   <li class={classNames( " mx-2  rounded-t-lg border-b-2 border-gray-500 inline-block ",history? "text-white border-white" : " text-gray-500 hover:text-white hover:border-white")}>
                     <button 
                     onClick={()=>{
+                      setDetails(details)
+                      setBid(bid)
                       setHistory(!history)
                     }}
                     className="font-bold">History</button>

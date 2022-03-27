@@ -5,3 +5,4 @@ dist-ssr
 .env
 package-lock.json
 *.local
+.devcontainer/
