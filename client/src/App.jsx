@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {Navbar, Welcome, Services, Footer, Transactions} from'./components';
+import {Navbar, Welcome, Services, Footer, Transactions, Section} from'./components';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Singlenft from './components/Singlenft';
