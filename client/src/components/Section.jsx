@@ -2,11 +2,11 @@
 const   nftSection = () => {
     return(
     <div>
-       <div className=" bg-black  text-white">
+       <div className=" bg-black  text-white ">
        <div>
            <h1 className="text-white font-bold text-3xl px-8 py-3">Top collections</h1>
            </div>
-           <div className=" px-6 py-3 grid grid-cols-4 grid-rows-3  gap-4">
+           <div className=" lg:px-6 lg:py-3 grid lg:grid-cols-4 lg:grid-rows-3 gap-4     grid-cols-2 grid-rows-6 ml-6">
            <div className="flex">
            
            <img className="rounded-full w-12 h-12" src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"></img>
@@ -23,16 +23,16 @@ const   nftSection = () => {
            </div>
            </div>
            <div className="flex">
-           <img className="rounded-full w-12 h-12" src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/avatar/QmaoafyjBy97NKEPZzAD3FK8RcwCJHb263dDJbhCaXPWpo"></img>
+           <img className="rounded-full lg:w-12 lg:h-12     w-9 h-9 " src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/avatar/QmaoafyjBy97NKEPZzAD3FK8RcwCJHb263dDJbhCaXPWpo"></img>
            <div>
-           <h1 className="text-lg font-bold pl-2">MutantApeYachtClub</h1>
+           <h1 className="lg:text-lg  lg:font-bold lg: pl-2  text-lg font-bold">Mutant Ape Yacht Club</h1>
            <p className="pl-2 text-gray-400">$5,112,022</p>
            </div>
            </div> 
            <div className="flex">
            <img className="rounded-full w-12 h-12" src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/avatar/QmfNrXe67J4t1EvXLxPhxTavQCLryurWFj1DDRKkjNQqit"></img>
            <div>
-           <h1 className="text-lg font-bold pl-2">BoredApeYachtClub</h1>
+           <h1 className="text-lg font-bold pl-2">Bored Ape Yacht Club</h1>
            <p className="pl-2 text-gray-400">$3,935,809</p>
            </div>
            </div>
@@ -95,15 +95,12 @@ const   nftSection = () => {
 
            </div>
        </div>
-       <div className=" bg-black">
-       <div className=" flex">
+       <div className=" bg-black flex">
            <h1 className="flex text-white font-bold text-3xl px-8 py-5">Hot bids <img className="w-9 h-8 mb-1 ml-2" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@6.0.1/img/apple/64/1f525.png" alt=""/></h1>
-           
-       </div>
-       <div className=" bg-black">
-       <div className="flex">
-
-       <div className="border-2 rounded-2xl mx-auto mb-3">
+           </div>
+       <div className="bg-black grid lg:grid-cols-4 lg:grid-rows-1 lg:gap-4     grid-cols-2 grid-rows-2">
+       
+           <div className="border-2 rounded-2xl mx-auto mb-3">
        <img className="rounded-full w-10 h-10 ml-3 mt-2 mb-2" src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b/avatar/QmTNRdwYvd5nsMVoUGX4Gu2ZWwgbKbu9NNdxDLtcwEE8Kr"></img>
        <img className="w-44 h-60 my-2 ml-8 rounded-lg" src="https://img.rarible.com/prod/image/upload/t_image_preview/prod-itemImages/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b:11534/c5127bc9"></img>
        <div className="flex mt-8">
@@ -117,7 +114,7 @@ const   nftSection = () => {
        </div>
 
        </div>
-       <div className="border-2 rounded-2xl mx-auto mb-3">
+       <div className="border-2 rounded-2xl mx-auto mb-3  ">
        <img className="rounded-full w-10 h-10 ml-3 mt-2 mb-2" src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b/avatar/QmTNRdwYvd5nsMVoUGX4Gu2ZWwgbKbu9NNdxDLtcwEE8Kr"></img>
        <img className="w-44 h-60 my-2 ml-8 rounded-lg" src="https://api.sandbox.game/lands/cc5f9779-d4cc-4389-bb6e-3048fe317a36/v2/preview-500px-x-500px.jpg"></img>
        <div className="flex mt-8">
@@ -158,9 +155,12 @@ const   nftSection = () => {
            <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
        </div>
        </div>
+
+
        </div>
-       </div>
-       </div>
+
+
+       
        </div>
 
        

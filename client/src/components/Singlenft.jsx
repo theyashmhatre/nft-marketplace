@@ -10,7 +10,7 @@ const nftAbout = () => {
   const [history , setHistory] = useState(false);
 
   return (
-    <div className="bg-white ">
+    <div className="bg-black ">
       <div className="flex flex-col lg:flex-row image-div ">
         <div>
           <img
