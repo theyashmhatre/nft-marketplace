@@ -87,7 +87,7 @@ const Welcome = () => {
                             </div>
                             <div>
                                 <div className="flex flex-row">
-                                    <p className="text-white font-light text-sm mr-2 hover:text-black">
+                                    <p className="text-white font-light text-sm mr-2 hover:text-white">
                                         {shortenAddress(currentAccount)}
                                     </p>
                                     <MdOutlineContentCopy fontSize={15} className="mt-0.5 cursor-pointer" color="#fff" onClick={() => {navigator.clipboard.writeText(currentAccount)}} />
