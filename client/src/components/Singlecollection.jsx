@@ -99,7 +99,7 @@ const collectionpage = () => {
       </div>
       <div className="pt-8">
         <div className="grid lg:grid-cols-4 lg:grid-row-5  grid-cols-1 grid-row-12">
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -120,7 +120,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -141,7 +141,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -162,7 +162,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -183,7 +183,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -204,7 +204,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -225,7 +225,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -246,7 +246,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -267,7 +267,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -288,7 +288,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -309,7 +309,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -330,7 +330,7 @@ const collectionpage = () => {
               <h1 className="text-blue-600 mx-7 mt-1 mb-2">Buy now</h1>
             </div>
           </div>
-          <div className="border-2 rounded-2xl mx-auto mb-3">
+          <div className="border-2 rounded-2xl mx-auto mb-6">
             <img
               className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
               src="https://img.rarible.com/prod/image/upload/t_avatar_preview/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
