@@ -3,6 +3,7 @@ import Footer from './Footer'
 import Services from './Services'
 import Transactions from './Transactions'
 import Welcome from './Welcome'
+import Section from './Section'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         </div>
         <Services />
         <Transactions />
+        <Section />
         
     </div>
   )
