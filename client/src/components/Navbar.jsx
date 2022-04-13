@@ -3,13 +3,16 @@ import {HiMenuAlt4} from 'react-icons/hi';
 import {AiOutlineClose} from 'react-icons/ai';
 
 import logo from '../../images/logo.png';
+import { Link } from 'react-router-dom';
 
 
 const NavbarItem = ({title, classProps}) => {
     return (
+        <Link to={title}>
         <li className={`mx-4 cursor-pointer ${classProps}`}>
             {title}
         </li>
+        </Link>
     )
 }
 
@@ -23,7 +26,7 @@ const Navbar = () => {
                 <img src={logo} alt="logo" className='w-32 cursor-pointer' />
             </div>
             <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
-                {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
+                {["Create", "Profile"].map((item, index) => (
                     <NavbarItem key={item + index} title={item} />
                 ))}
 
@@ -36,7 +39,7 @@ const Navbar = () => {
                     {toggleMenu ? 
                     <AiOutlineClose fontsize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(false)} /> 
                     : 
-                    <HiMenuAlt4 fontsize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(true)} /> }
+                    <HiMenuAlt4 fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(true)} /> }
 
                     {toggleMenu && (
                         <ul 
@@ -46,7 +49,7 @@ const Navbar = () => {
                             <li className='text-xl w-full my-2'>
                                 <AiOutlineClose onClick={() => setToggleMenu(false)} />
                             </li>
-                        {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
+                        {["Create", "Profile"].map((item, index) => (
                             <NavbarItem key={item + index} title={item} classProps={"my-2 text-lg"} />
                         ))}
                         </ul>

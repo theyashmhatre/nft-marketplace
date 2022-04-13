@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Singlenft from './components/Singlenft';
 import CreateNFT from './components/CreateNFT/CreateNFT';
+import ProfileSection from './components/ProfileSection/profileSection';
 
 const App = () => {
 
@@ -18,9 +19,8 @@ const App = () => {
                   <Route path='/' element={<Home />} />
                   <Route exact path='/create' element={<CreateNFT />} />
                   <Route exact path ='/Singlenft' element={<Singlenft/>} />
-                  
+                  <Route exact path ='/Profile' element={<ProfileSection/>} />
              </Routes>
-
             <Footer />
         </div>
       </Router>
