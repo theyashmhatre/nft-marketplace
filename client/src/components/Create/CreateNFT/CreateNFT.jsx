@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FcAddImage } from "react-icons/fc";
-import { MarketplaceContext } from '../../context/MarketplaceContext';
+import { MarketplaceContext } from '../../../context/MarketplaceContext';
 import { Buffer } from 'buffer';
 import {ImageUpload, MetadataUpload, TransactionApprove, NFTCreate} from './Modal/ModalContent';
-import { WalletContext } from '../../context/WalletContext';
+import { WalletContext } from '../../../context/WalletContext';
 import Modal from './Modal/Modal';
 import ListNft from './Modal/ModalContent/ListNft';
 

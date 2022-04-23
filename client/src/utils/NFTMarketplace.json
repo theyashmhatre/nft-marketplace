@@ -178,25 +178,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "collectionName",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "collectionsCount",
 				"outputs": [
@@ -215,6 +196,16 @@
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageURL",
+						"type": "string"
 					}
 				],
 				"name": "createCollection",
@@ -232,6 +223,11 @@
 					{
 						"internalType": "uint256",
 						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "collectionId",
 						"type": "uint256"
 					}
 				],
@@ -264,6 +260,11 @@
 						"internalType": "uint256",
 						"name": "price",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "collectionId",
+						"type": "uint256"
 					}
 				],
 				"name": "createToken",
@@ -275,6 +276,84 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageURL",
+						"type": "string"
+					}
+				],
+				"name": "createUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "fetchAllNFTs",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenURI",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "sold",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isListed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct NFTMarketplace.SingleItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -290,13 +369,23 @@
 							},
 							{
 								"internalType": "address payable",
-								"name": "seller",
+								"name": "creator",
 								"type": "address"
 							},
 							{
 								"internalType": "address payable",
 								"name": "owner",
 								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenURI",
+								"type": "string"
 							},
 							{
 								"internalType": "uint256",
@@ -307,9 +396,19 @@
 								"internalType": "bool",
 								"name": "sold",
 								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isListed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct NFTMarketplace.MarketItem[]",
+						"internalType": "struct NFTMarketplace.SingleItem[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -330,13 +429,23 @@
 							},
 							{
 								"internalType": "address payable",
-								"name": "seller",
+								"name": "creator",
 								"type": "address"
 							},
 							{
 								"internalType": "address payable",
 								"name": "owner",
 								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenURI",
+								"type": "string"
 							},
 							{
 								"internalType": "uint256",
@@ -347,9 +456,19 @@
 								"internalType": "bool",
 								"name": "sold",
 								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isListed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct NFTMarketplace.MarketItem[]",
+						"internalType": "struct NFTMarketplace.SingleItem[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -370,13 +489,23 @@
 							},
 							{
 								"internalType": "address payable",
-								"name": "seller",
+								"name": "creator",
 								"type": "address"
 							},
 							{
 								"internalType": "address payable",
 								"name": "owner",
 								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenURI",
+								"type": "string"
 							},
 							{
 								"internalType": "uint256",
@@ -387,9 +516,59 @@
 								"internalType": "bool",
 								"name": "sold",
 								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isListed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
 							}
 						],
-						"internalType": "struct NFTMarketplace.MarketItem[]",
+						"internalType": "struct NFTMarketplace.SingleItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllCollections",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "imageURL",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "createdBy",
+								"type": "address"
+							}
+						],
+						"internalType": "struct NFTMarketplace.CollectionData[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -411,6 +590,236 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "collectionID",
+						"type": "uint256"
+					}
+				],
+				"name": "getSingleCollection",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenURI",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "sold",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isListed",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct NFTMarketplace.SingleItem[]",
+						"name": "",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "collectionId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "imageURL",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "createdBy",
+								"type": "address"
+							}
+						],
+						"internalType": "struct NFTMarketplace.CollectionData",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "idToCollectionData",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "collectionId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageURL",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "createdBy",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "idToSingleItem",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenURI",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "sold",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isListed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "collectionId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "idToUser",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "userId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageURL",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "userCreated",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -470,48 +879,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "collectionID",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "num",
-						"type": "uint256"
-					}
-				],
-				"name": "readFromCollection",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					}
-				],
-				"name": "resellToken",
-				"outputs": [],
-				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -655,6 +1022,19 @@
 				"name": "transferFrom",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -814,11 +1194,11 @@
 			]
 		},
 		"contracts/NFTMarketplace.sol": {
-			"keccak256": "0xc645b1d850da1e1b6dd584b1ececc0582848a88012a47ff35b2825890afe01ff",
+			"keccak256": "0xf80bf2bbbd3f4726ec389e83b9fdbc4250627459a58c3554daab2f776da55fd0",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://004a77947d578fbbe0a7a0261a94213093e60836c152e59ba46385675d383364",
-				"dweb:/ipfs/QmSdCSFiBafvWJhCHH6W22rBdjM8eDT9tpagDQN4bXuod9"
+				"bzz-raw://2f1bd20aba6e346fa592722b526c5ecbe50fa9bef0fae297b07a8e015cea2e5f",
+				"dweb:/ipfs/Qmey59921eGNFGb2FNXkMNjbahY4xy2FuxC1k78kNz5yo8"
 			]
 		},
 		"hardhat/console.sol": {
