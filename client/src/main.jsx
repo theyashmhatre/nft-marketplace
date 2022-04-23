@@ -6,12 +6,8 @@ import {WalletProvider} from './context/WalletContext';
 import { MarketplaceProvider } from './context/MarketplaceContext';
 
 ReactDOM.render(
-  <WalletProvider>
-    <MarketplaceProvider>
       <React.StrictMode>
       <App />
-    </React.StrictMode>
-    </MarketplaceProvider>
-  </WalletProvider>,
+    </React.StrictMode>,
   document.getElementById('root')
 )

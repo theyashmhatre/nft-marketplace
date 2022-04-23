@@ -1,4 +1,8 @@
-const nftSection = () => {
+import { useEffect, useState } from "react";
+import CollectionCard from "./Collection/CollectionCard";
+
+const NftSection = ({ allCollections }) => {
+  
   return (
     <div>
       <div className=" bg-black  text-white ">
@@ -8,7 +12,17 @@ const nftSection = () => {
           </h1>
         </div>
         <div className=" lg:px-6 lg:py-3 grid lg:grid-cols-4 lg:grid-rows-3 gap-4     grid-cols-2 grid-rows-6 ml-6">
-          <div className="flex">
+
+          {allCollections.length ? allCollections.map((collection, i) => {
+            console.log(collection);
+            return (
+              <CollectionCard 
+                key = {i}
+                collection = {collection}
+              />
+            )
+          }) : <></>}
+          {/* <div className="flex">
             <img
               className="rounded-full w-12 h-12"
               src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0xf61f24c2d93bf2de187546b14425bf631f28d6dc/avatar/QmSJwqvWiQmHXqQugbi63uDLf7TzACzHcSJG33GkteNpE6"
@@ -19,7 +33,7 @@ const nftSection = () => {
               </h1>
               <p className="pl-2 text-gray-400">$27,868,412</p>
             </div>
-          </div>
+          </div> */}
           <div className="flex">
             <img
               className="rounded-full w-12 h-12"
@@ -233,4 +247,4 @@ const nftSection = () => {
     </div>
   );
 };
-export default nftSection;
+export default NftSection;

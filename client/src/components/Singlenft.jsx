@@ -1,29 +1,54 @@
-import React,{useState} from "react";
+import React,{useContext, useEffect, useState} from "react";
 import classNames from "classnames";
-
+import { MarketplaceContext } from "../context/MarketplaceContext";
+import axios from "axios";
 import "./Singlenft.css";
+import { useParams } from "react-router-dom";
+import { ethers } from "ethers";
 
 
 const nftAbout = () => {
   const [details , setDetails] = useState(true);
+  const [NFTData, setNFTData] = useState();
+  const [metadata, setMetadata] = useState();
   const [bid , setBid] = useState(false);
   const [history , setHistory] = useState(false);
+  const {nftId} = useParams();
+  const {getSingleNFT, buyNFT} = useContext(MarketplaceContext);
+
+  const buyNow = async () => {
+    console.log("wrgv");
+    await buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16));
+  };
+
+  useEffect( async () => {
+      const token = await getSingleNFT(nftId);
+      console.log(token);
+      setNFTData(token);
+
+    axios.get("https://ipfs.io/ipfs/" + token.tokenURI).then((res) => {
+      console.log(res.data);
+      setMetadata(res.data); 
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
 
   return (
     <div className="bg-black ">
-      <div className="flex flex-col lg:flex-row image-div ">
+      {metadata ? <div className="flex flex-col lg:flex-row image-div ">
         <div>
           <img
             className="image  lg:mx-60 w-80 h-116 pt-6 pb-8 pr-6 pl-6 rounded-[50px]  "
-            src="https://img.rarible.com/prod/image/upload/t_image_big/prod-itemImages/0x2b4307153072ac60dbe6100e7d4e8d61834d16cc:9/f94fbc26"
+            src={metadata.image}
           ></img>
         </div>
         <div className="pt-6 items-center mx-20">
           <h1 className="flex text-2xl lg:text-4xl text-white font-bold">
-            The Minimum
+            {NFTData.name}
           </h1>
           <p className="text-lg text-gray-400 pt-2">
-            On sale for <span className="span-color">6 ETH</span>
+            On sale for <span className="span-color">{ethers.utils.formatEther(NFTData.price)} MATIC</span>
           </p>
           <h3 className="text-lg text-white pt-4 pr-4">
             I love this image so much. But, to matter is just the first step. We
@@ -43,40 +68,40 @@ const nftAbout = () => {
               </div>
               <div>
                 <ul
-                  className="flex mt-10  " 
-                
+                  className="flex mt-10  "
+
                 >
-                  <li className={classNames( " mx-1  rounded-t-lg border-b-2  inline-block " ,
-                  details ?"border-white text-white":" border-gray-500 text-gray-500 hover:text-white hover:border-white")}>
-                    <button onClick={()=> {
+                  <li className={classNames(" mx-1  rounded-t-lg border-b-2  inline-block ",
+                    details ? "border-white text-white" : " border-gray-500 text-gray-500 hover:text-white hover:border-white")}>
+                    <button onClick={() => {
                       setDetails(!details)
                       setBid(bid)
                       setHistory(history)
                     }} className="font-bold">Details</button>
                   </li>
-                  <li className={classNames(" mx-3  rounded-t-lg border-b-2  inline-block", bid? "border-white text-white":" border-gray-500 text-gray-500 hover:text-white hover:border-white" )}>
-                    <button onClick={()=>{
-                         setDetails(details)
-                         setBid(!bid)
-                         setHistory(history)
+                  <li className={classNames(" mx-3  rounded-t-lg border-b-2  inline-block", bid ? "border-white text-white" : " border-gray-500 text-gray-500 hover:text-white hover:border-white")}>
+                    <button onClick={() => {
+                      setDetails(details)
+                      setBid(!bid)
+                      setHistory(history)
                     }} className="font-bold">
                       Bids
                     </button>
                   </li>
-                  <li class={classNames( " mx-2  rounded-t-lg border-b-2 border-gray-500 inline-block ",history? "text-white border-white" : " text-gray-500 hover:text-white hover:border-white")}>
-                    <button 
-                    onClick={()=>{
-                      setDetails(details)
-                      setBid(bid)
-                      setHistory(!history)
-                    }}
-                    className="font-bold">History</button>
+                  <li class={classNames(" mx-2  rounded-t-lg border-b-2 border-gray-500 inline-block ", history ? "text-white border-white" : " text-gray-500 hover:text-white hover:border-white")}>
+                    <button
+                      onClick={() => {
+                        setDetails(details)
+                        setBid(bid)
+                        setHistory(!history)
+                      }}
+                      className="font-bold">History</button>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <div className={classNames(" h-56 w-80 pt-4 overflow-auto  ",details?"block":"hidden")}>
+                <div className={classNames(" h-56 w-80 pt-4 overflow-auto  ", details ? "block" : "hidden")}>
                   <div>
                     <hr />
 
@@ -108,22 +133,22 @@ const nftAbout = () => {
                     </div>
                   </div>
                 </div>
-               
-                <div className={classNames(" px-2 pt-4 pb-3", bid?"block":"hidden")}>
-                  <hr/>
+
+                <div className={classNames(" px-2 pt-4 pb-3", bid ? "block" : "hidden")}>
+                  <hr />
                   <h1 className="text-gray-500 font-bold py-10 ">No active bids yet. Be the first to make a bid!</h1>
-                  <hr/>
+                  <hr />
                 </div>
-                <div className={classNames("flex my-4",history? "block":"hidden")}>
-                
-                <img
-                  className="shrink-0 h-10 w-10 rounded-full mt-1"
-                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjExMjE3Mjk4MDg2NDAiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSJyZ2IoMjU1LCA2MCwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDI1NSwgNjApIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCMxMTIxNzI5ODA4NjQwKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
-                ></img>
-                <div className="flex-col">
-                <h3 className="text-gray-500  pl-1">Listed for <span className="span-color"> 6 ETH</span></h3>
-                <p className="text-gray-500  pl-1">by <span className="span-color">Misan Harriman</span>  3/16/2022, 3:36 AM</p> 
-                </div>
+                <div className={classNames("flex my-4", history ? "block" : "hidden")}>
+
+                  <img
+                    className="shrink-0 h-10 w-10 rounded-full mt-1"
+                    src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjExMjE3Mjk4MDg2NDAiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSJyZ2IoMjU1LCA2MCwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDI1NSwgNjApIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCMxMTIxNzI5ODA4NjQwKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
+                  ></img>
+                  <div className="flex-col">
+                    <h3 className="text-gray-500  pl-1">Listed for <span className="span-color"> 6 MATIC</span></h3>
+                    <p className="text-gray-500  pl-1">by <span className="span-color">Misan Harriman</span>  3/16/2022, 3:36 AM</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,25 +163,26 @@ const nftAbout = () => {
                 <h3 className="text-white pt-3 pl-1">The Purpose Of Light.</h3>
               </div>
             </div>
-            
 
-            
+
+
           </div>
-          <div className="mt-12 flex pb-3">
-            <div>
+          
+          {!NFTData.isListed ? <div className="mt-12 flex pb-3">
+            <div onClick={() => {buyNow()}}>
               <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">Buy now</div>
             </div>
-            <div className="mx-28 ">  
-            <div className=" flex bg-blue-700 text-white font-bold rounded-full px-8 py-1">Place a bid</div>
+            <div className="mx-28 ">
+              <div className=" flex bg-blue-700 text-white font-bold rounded-full px-8 py-1">Place a bid</div>
             </div>
-          </div>
+          </div> : <></>}
           <div>
 
           </div>
         </div>
-        
-        
-      </div>
+
+
+      </div> : <></>}
       
     </div>
     
