@@ -5,7 +5,7 @@ import output from "./NFTMarketplace.json";
 export const contractABI = abi.abi;
 export const nftContractABI = output.output.abi;
 export const contractAddress = '0xC9C8640083De6b77b909E3Fc339FC0a45C9487f3';
-export const nftContractAddress = '0x31586a461E068BBD999FF9df78A19e8cd85A273d';
+export const nftContractAddress = '0xdde60705ec784a87e01dd3ad91c43532b777b6fd';
 
 export const networks = {
     mumbai_testnet: {

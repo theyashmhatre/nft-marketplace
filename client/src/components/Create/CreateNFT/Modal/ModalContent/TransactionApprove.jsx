@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { MarketplaceContext } from '../../../../context/MarketplaceContext';
-import Loader from '../../../Loader';
+import { MarketplaceContext } from '../../../../../context/MarketplaceContext';
+import Loader from '../../../../Loader';
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { FaSignature } from "react-icons/fa";
 

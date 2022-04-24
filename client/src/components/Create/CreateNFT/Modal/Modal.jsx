@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import Loader from '../../Loader';
 import { HiSwitchHorizontal } from "react-icons/hi";
 import { ImWarning } from "react-icons/im";
-import { WalletContext } from '../../../context/WalletContext';
+import { WalletContext } from '../../../../context/WalletContext';
 
 export default function Modal() {
     const {changeNetwork} = useContext(WalletContext);
