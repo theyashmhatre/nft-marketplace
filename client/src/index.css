@@ -83,3 +83,108 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bNwIlU{
+  display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    white-space: nowrap;
+    background-color: rgba(255, 255, 255, 0.08);
+    line-height: 40px;
+    height: 40px;
+    padding-left: 22px;
+    padding-right: 22px;
+    min-width: auto;
+    border: 1px solid transparent;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 900;
+    font-family: inherit;
+    transition: all 0.15s ease-in-out 0s;
+    transform-origin: center center;
+    user-select: none;
+    cursor: pointer;
+    border-color: rgb(45, 129, 255);
+    color: rgb(255, 255, 255);
+    background: rgb(45, 129, 255);
+}
+.bNwIlU:active {
+  transform: scale(0.95);
+}
+.nLPsul{
+  transform-origin: center center;
+}
+
+.nLPsul:hover {
+  transition: all .2s ease-in-out;
+  transform: scale(0.95);
+}
+.dNsYU {
+  inset: 0px;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  background: rgb(18, 18, 18);
+  padding: 0px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.hKPgxQ {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  margin: 16px 18px 0px;
+}
+.fLhTAG {
+  transition: all 0.15s ease-in-out 0s;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid transparent;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    border-radius: 48px;
+    -webkit-box-pack: center;
+    justify-content: center;
+  color: rgb(140, 140, 140);
+  transform-origin: center center;
+}
+.jiNilR {
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 16px;
+    display: flex;
+}
+.cKmyUG {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  color: rgb(255, 255, 255);
+  transition: all 0.15s ease-in-out 0s;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    vertical-align: inherit;
+  line-height: 24px;
+}
+.fEdSMd {
+  margin: 5px 18px 16px;
+}

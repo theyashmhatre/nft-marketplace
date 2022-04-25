@@ -204,11 +204,10 @@ export const MarketplaceProvider = ({ children }) => {
             if (!ethereum) return alert("Please install Metamask");
 
             const marketplaceContract = await getEthereumContract();
-            const myNFTs = await marketplaceContract.fetchMarketItems();
-
-            console.log(myNFTs);
+            const myNFTs = await marketplaceContract.fetchAllNFTs();
+            return myNFTs;
         } catch (error) {
-
+            throw('cannot get all nfts');
         }
     };
 
