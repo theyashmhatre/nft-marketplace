@@ -30,7 +30,7 @@ export default function ProfileSection() {
   const NoItems = () => {
     return (
       <>
-        <div className="flex flex-col py-[60px]">
+        <div className="flex flex-col mx-auto py-[60px]">
           <div className={classNames(
             "flex flex-col text-white",
             'max-w-[360px] mx-auto text-center',
@@ -129,6 +129,8 @@ export default function ProfileSection() {
             }}>Collection</button>
           </div>
           <div className=' w-full h-[0.25px] bg-gray-600 mt-5 nLPsul' />
+
+          {!nftList && <NoItems/>}
           <div className='mt-[40px] grid grid-cols-2 xl:grid-cols-3 gap-4'>
             {nftList && onSale && <>
               {

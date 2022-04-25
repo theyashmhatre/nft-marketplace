@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 export default function Create() {
     return (
-        <div className='flex justify-around py-[100px] px-[20%] min-h-[700px] bg-[#121212]'>
+        <div className='flex md:flex-row flex-col justify-around pt-[100px] px-[20%] min-h-[700px] bg-[#121212]'>
             <Link to="/create/nft"><button type="button"  className="lomMVY">NFT</button></Link>
-            <Link to="/create/nft"><button type="button"  className="lomMVY">Collection</button></Link>
+            <Link to="/create/nft"><button type="button"  className="lomMVY md:pt-0 pt-4">Collection</button></Link>
             {/* <div className={classNames(
                 'w-1/2 my-[10%] h-100 text-center',
                 ''

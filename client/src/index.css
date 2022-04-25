@@ -275,10 +275,21 @@ body {
   cursor: pointer;
   padding: 24px;
   min-width: 200px;
-  background-color: #121212;
-  color: white;
+  background-image:  linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  background-size: 200%;
+  color: rgb(255, 255, 255);
+  font-size: larger;
+  font-weight: bold;
 }
 
 .lomMVY:hover, .lomMVY:focus {
   border-color: rgba(182, 182, 182, 0.829);
+  transform: scale(0.95); 
+}
+.eBApMP {
+  background-image: linear-gradient(to right, rgb(255, 0, 184) 0%, rgb(100, 161, 255) 50%, rgb(0, 102, 255) 100%);
+  background-size: 200%;
+  color: rgb(255, 255, 255);
+  border: 0px;
+  transition: all 0.5s ease-in-out 0s;
 }
