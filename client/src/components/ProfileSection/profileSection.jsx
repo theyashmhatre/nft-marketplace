@@ -130,18 +130,37 @@ export default function ProfileSection() {
           </div>
           <div className=' w-full h-[0.25px] bg-gray-600 mt-5 nLPsul' />
           <div className='mt-[40px] grid grid-cols-2 xl:grid-cols-3 gap-4'>
-            {nftList ? <>
-            {
-              nftList.map((nft,index)=>{
-                if (onSale && nft.isListed && nft.owner === currentAccount) {
-                  console.log(nft.isListed);
+            {nftList && onSale && <>
+              {
+                nftList.map((nft, index) => {
+                  const i = nftList;
+                  if (nft.isListed && nft.owner === currentAccount) {
                     return <div key={index}><Card props={nft} /></div>;
-                } else if(owned && nft.owner === currentAccount){
-                  return <div key={index}><Card props={nft} /></div>;
-                } 
-                return 
-              })
-            }</> : <NoItems />}
+                  }
+                  return
+                })
+              }
+            </>}
+            {nftList && owned && <>
+              {
+                nftList.map((nft, index) => {
+                  if (nft.owner === currentAccount) {
+                    return <div key={index}><Card props={nft} /></div>;
+                  }
+                  return
+                })
+              }
+            </>}
+            {nftList && collection && <>
+              {
+                nftList.map((nft, index) => {
+                  if (nft.owner === currentAccount) {
+                    return <div key={index}><Card props={nft} /></div>;
+                  }
+                  return
+                })
+              }
+              </>}
           </div>
         </div>
       </div>
