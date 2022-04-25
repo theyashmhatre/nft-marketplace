@@ -4,6 +4,7 @@ import { MarketplaceContext } from '../../context/MarketplaceContext';
 import { WalletContext } from '../../context/WalletContext';
 import { shortenAddress } from '../../utils/shortnerAddress';
 import Card from '../Card';
+import CollectionCard from '../Collection/CollectionCard';
 
 export default function ProfileSection() {
   const { connectWallet, currentAccount } = useContext(WalletContext);
@@ -13,6 +14,7 @@ export default function ProfileSection() {
   const [bought, setBought] = useState(false);
   const { fetchNFTs } = useContext(MarketplaceContext);
   const [nftList, setNftList] = useState([]);
+  const {allCollections} = useContext(MarketplaceContext);
   useEffect(async () => {
     fetchNft();
   }, [])
@@ -130,7 +132,7 @@ export default function ProfileSection() {
           </div>
           <div className=' w-full h-[0.25px] bg-gray-600 mt-5 nLPsul' />
 
-          {!nftList && <NoItems/>}
+          {!nftList && !collection && <NoItems/>}
           <div className='mt-[40px] grid grid-cols-2 xl:grid-cols-3 gap-4'>
             {nftList && onSale && <>
               {
@@ -159,11 +161,12 @@ export default function ProfileSection() {
                 })
               }
               </>}
-            {nftList && collection && <>
+            {allCollections && collection && <>
               {
-                nftList.map((nft, index) => {
-                    return <div key={index}><Card props={nft} /></div>;
-                  
+                allCollections.map((nft, index) => {
+                    return <div key={index}><CollectionCard
+                    collection = {nft}
+                  /></div>;
                 })
               }
               </>}
