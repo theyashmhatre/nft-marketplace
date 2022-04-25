@@ -159,7 +159,7 @@ const NftSection = ({ allCollections }) => {
         </h1>
       </div>
       <div className="bg-black grid lg:grid-cols-4 lg:grid-rows-1 lg:gap-4     grid-cols-2 grid-rows-2">
-        <div className="border-2 rounded-2xl mx-auto mb-3">
+        {/* <div className="border-2 rounded-2xl mx-auto mb-3">
           <img
             className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
             src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b/avatar/QmTNRdwYvd5nsMVoUGX4Gu2ZWwgbKbu9NNdxDLtcwEE8Kr"
@@ -179,7 +179,7 @@ const NftSection = ({ allCollections }) => {
             <h1 className="text-gray-400 mx-7">Auction 1/1</h1>
             <h1 className="text-blue-600 mx-7 mt-1 mb-2">Bid 6 wETH</h1>
           </div>
-        </div>
+        </div> */}
         <div className="border-2 rounded-2xl mx-auto mb-3  ">
           <img
             className="rounded-full w-10 h-10 ml-3 mt-2 mb-2"
