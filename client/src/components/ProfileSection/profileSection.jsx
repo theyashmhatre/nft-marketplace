@@ -133,8 +133,7 @@ export default function ProfileSection() {
             {nftList && onSale && <>
               {
                 nftList.map((nft, index) => {
-                  const i = nftList;
-                  if (nft.isListed && nft.owner === currentAccount) {
+                  if (nft.isListed) {
                     return <div key={index}><Card props={nft} /></div>;
                   }
                   return
@@ -144,20 +143,25 @@ export default function ProfileSection() {
             {nftList && owned && <>
               {
                 nftList.map((nft, index) => {
-                  if (nft.owner === currentAccount) {
+                    return <div key={index}><Card props={nft} /></div>;
+                })
+              }
+            </>}
+            {nftList && bought && <>
+              {
+                nftList.map((nft, index) => {
+                  if (nft.sold) {
                     return <div key={index}><Card props={nft} /></div>;
                   }
                   return
                 })
               }
-            </>}
+              </>}
             {nftList && collection && <>
               {
                 nftList.map((nft, index) => {
-                  if (nft.owner === currentAccount) {
                     return <div key={index}><Card props={nft} /></div>;
-                  }
-                  return
+                  
                 })
               }
               </>}
