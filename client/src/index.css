@@ -14,32 +14,32 @@ body {
 }
 
 .gradient-bg-welcome {
-  background-color:#0f0e13;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  background-color: #0f0e13;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
 }
 
 .gradient-bg-services {
-  background-color:#0f0e13;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 100%, hsla(225,39%,25%,1) 0, transparent 50%);
+  background-color: #0f0e13;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 100%, hsla(225, 39%, 25%, 1) 0, transparent 50%);
 }
 
 .gradient-bg-transactions {
   background-color: #0f0e13;
-  background-image: 
-    radial-gradient(at 0% 100%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,25%,1) 0, transparent 50%);
+  background-image:
+    radial-gradient(at 0% 100%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 25%, 1) 0, transparent 50%);
 }
 
 .gradient-bg-footer {
   background-color: #0f0e13;
-  background-image: 
-    radial-gradient(at 0% 100%, hsla(253,16%,7%,1) 0, transparent 53%), 
-    radial-gradient(at 50% 150%, hsla(339,49%,30%,1) 0, transparent 50%);
+  background-image:
+    radial-gradient(at 0% 100%, hsla(253, 16%, 7%, 1) 0, transparent 53%),
+    radial-gradient(at 50% 150%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
 }
 
 .blue-glassmorphism {
@@ -61,20 +61,20 @@ body {
 }
 
 .eth-card {
-  background-color:#a099ff;
-  background-image: 
-    radial-gradient(at 83% 67%, rgb(152, 231, 156) 0, transparent 58%), 
-    radial-gradient(at 67% 20%, hsla(357,94%,71%,1) 0, transparent 59%), 
-    radial-gradient(at 88% 35%, hsla(222,81%,65%,1) 0, transparent 50%), 
-    radial-gradient(at 31% 91%, hsla(9,61%,61%,1) 0, transparent 52%), 
-    radial-gradient(at 27% 71%, hsla(336,91%,65%,1) 0, transparent 49%), 
-    radial-gradient(at 74% 89%, hsla(30,98%,65%,1) 0, transparent 51%), 
-    radial-gradient(at 53% 75%, hsla(174,94%,68%,1) 0, transparent 45%);
+  background-color: #a099ff;
+  background-image:
+    radial-gradient(at 83% 67%, rgb(152, 231, 156) 0, transparent 58%),
+    radial-gradient(at 67% 20%, hsla(357, 94%, 71%, 1) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsla(222, 81%, 65%, 1) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsla(9, 61%, 61%, 1) 0, transparent 52%),
+    radial-gradient(at 27% 71%, hsla(336, 91%, 65%, 1) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsla(30, 98%, 65%, 1) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsla(174, 94%, 68%, 1) 0, transparent 45%);
 }
 
 .text-gradient {
   background-color: #fff;
-  background-image: radial-gradient(at 4% 36%, hsla(0,0%,100%,1) 0, transparent 53%), radial-gradient(at 100% 60%, rgb(0, 0, 0) 0, transparent 50%);
+  background-image: radial-gradient(at 4% 36%, hsla(0, 0%, 100%, 1) 0, transparent 53%), radial-gradient(at 100% 60%, rgb(0, 0, 0) 0, transparent 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -85,37 +85,39 @@ body {
 @tailwind utilities;
 
 
-.bNwIlU{
+.bNwIlU {
   display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    flex-flow: row nowrap;
-    white-space: nowrap;
-    background-color: rgba(255, 255, 255, 0.08);
-    line-height: 40px;
-    height: 40px;
-    padding-left: 22px;
-    padding-right: 22px;
-    min-width: auto;
-    border: 1px solid transparent;
-    border-radius: 40px;
-    font-size: 13px;
-    font-weight: 900;
-    font-family: inherit;
-    transition: all 0.15s ease-in-out 0s;
-    transform-origin: center center;
-    user-select: none;
-    cursor: pointer;
-    border-color: rgb(45, 129, 255);
-    color: rgb(255, 255, 255);
-    background: rgb(45, 129, 255);
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-flow: row nowrap;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.08);
+  line-height: 40px;
+  height: 40px;
+  padding-left: 22px;
+  padding-right: 22px;
+  min-width: auto;
+  border: 1px solid transparent;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 900;
+  font-family: inherit;
+  transition: all 0.15s ease-in-out 0s;
+  transform-origin: center center;
+  user-select: none;
+  cursor: pointer;
+  border-color: rgb(45, 129, 255);
+  color: rgb(255, 255, 255);
+  background: rgb(45, 129, 255);
 }
+
 .bNwIlU:active {
   transform: scale(0.95);
 }
-.nLPsul{
+
+.nLPsul {
   transform-origin: center center;
 }
 
@@ -123,6 +125,7 @@ body {
   transition: all .2s ease-in-out;
   transform: scale(0.95);
 }
+
 .dNsYU {
   inset: 0px;
   z-index: 1;
@@ -137,6 +140,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
 }
+
 .hKPgxQ {
   display: flex;
   flex-direction: row;
@@ -146,54 +150,60 @@ body {
   justify-content: space-between;
   margin: 16px 18px 0px;
 }
+
 .fLhTAG {
   transition: all 0.15s ease-in-out 0s;
   width: 30px;
   height: 30px;
   background: transparent;
   border: 1px solid transparent;
-    -webkit-box-align: center;
-    align-items: center;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    border-radius: 48px;
-    -webkit-box-pack: center;
-    justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  border-radius: 48px;
+  -webkit-box-pack: center;
+  justify-content: center;
   color: rgb(140, 140, 140);
   transform-origin: center center;
 }
+
 .jiNilR {
   margin-left: 18px;
   margin-right: 18px;
   margin-top: 16px;
-    display: flex;
+  display: flex;
 }
+
 .cKmyUG {
   -webkit-box-flex: 1;
   flex-grow: 1;
   color: rgb(255, 255, 255);
   transition: all 0.15s ease-in-out 0s;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 100%;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-    vertical-align: inherit;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  vertical-align: inherit;
   line-height: 24px;
 }
+
 .fEdSMd {
   margin: 5px 18px 16px;
 }
+
 .hAjoXB {
   font-family: inherit;
   font-weight: 700;
   font-size: 14px;
   vertical-align: inherit;
 }
+
 .jeeEJR {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -203,21 +213,25 @@ body {
   font-weight: 700;
   vertical-align: inherit;
 }
+
 .iQeOnQ {
   font-family: inherit;
   font-weight: inherit;
   color: rgb(255, 255, 255);
   vertical-align: inherit;
 }
+
 .sViYF {
   margin-left: 4px;
 }
+
 .jpclKj {
   font-family: inherit;
   font-weight: inherit;
   color: rgb(140, 140, 140);
   vertical-align: inherit;
 }
+
 .fhzJjE {
   display: block;
   margin-top: 2px;
@@ -226,20 +240,45 @@ body {
   line-height: 17px;
   color: rgb(140, 140, 140);
   text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
 }
+
 .bEOvQm {
   background: transparent;
   border: none;
   cursor: pointer;
   line-height: normal;
 }
+
 .bjByIS {
   font-family: inherit;
   font-weight: 700;
   color: rgb(0, 102, 255);
   vertical-align: inherit;
   background: linear-gradient(126.49deg, rgb(0, 163, 255) 0%, rgb(0, 102, 255) 100%) text;
+}
+
+.lomMVY {
+  padding-bottom: 42px;
+  min-height: 400px;
+  text-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.373);
+  border-radius: 16px;
+  transition: all 0.15s ease-in-out 0s;
+  user-select: none;
+  cursor: pointer;
+  padding: 24px;
+  min-width: 200px;
+  background-color: #121212;
+  color: white;
+}
+
+.lomMVY:hover, .lomMVY:focus {
+  border-color: rgba(182, 182, 182, 0.829);
 }
