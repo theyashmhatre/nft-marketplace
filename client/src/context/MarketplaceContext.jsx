@@ -16,8 +16,6 @@ const getEthereumContract = async () => {
     const signer = provider.getSigner();
     const marketplaceContract = new ethers.Contract(nftContractAddress, nftContractABI, signer);
     const network = await provider.getNetwork();
-    const chainId = network.chainId;
-    console.log(network, chainId);
 
     marketplaceContract.on("Transfer", (from, to, amount, event) => {
         console.log(`${from} sent ${ethers.utils.formatEther(amount)} to ${to}`);
@@ -34,6 +32,7 @@ export const MarketplaceProvider = ({ children }) => {
 
     const [allCollections, setALLCollections] = useState([]);
     const [itemDetails, setItemDetails] = useState({ image: { preview: "", raw: "", visible: false, file: '' }, name: "", extlink: "", description: "", price: "" });
+    const [user, setUser] = useState({name: "", imageURL: ""});
     const [uploadStatus, setUploadStatus] = useState({
         imageUploaded: false,
         metadataUploaded: false,
@@ -59,7 +58,7 @@ export const MarketplaceProvider = ({ children }) => {
     //storing file and json metadata on IPFS storage
     const storeNFTonIPFS = async () => {
 
-        const fileUrl = await storeImage(itemDetail.image);
+        const fileUrl = await storeImage(itemDetails.image);
         handleChange("imageUploaded");
 
         const nftData = {
@@ -79,11 +78,12 @@ export const MarketplaceProvider = ({ children }) => {
     };
 
     //Listing the NFT on the market for sale
-    const listNFTonMarket = async (tokenId, price, marketplaceContract) => {
+    const listNFTonMarket = async (tokenId, price, collectionId) => {
         try {
             if (!ethereum) return alert("Please install Metamask");
+            const marketplaceContract = await getEthereumContract();
 
-            const listingHash = await marketplaceContract.createMarketItem(tokenId, price);
+            const listingHash = await marketplaceContract.createMarketItem(tokenId, price, collectionId);
 
             await listingHash.wait();
             handleChange("nftListed");
@@ -106,7 +106,7 @@ export const MarketplaceProvider = ({ children }) => {
 
             const parsedAmount = price ? ethers.utils.parseEther(price) : ethers.utils.parseEther(0.1);
 
-            const mintHash = await marketplaceContract.createToken(uri, parsedAmount);
+            const mintHash = await marketplaceContract.createToken(uri, parsedAmount, 0);
             console.log(mintHash);
 
             handleChange("transactionApproved");
@@ -121,7 +121,7 @@ export const MarketplaceProvider = ({ children }) => {
             handleChange("nftCreated");
 
             if (listNft) {
-                await listNFTonMarket(tokenId, parsedAmount, marketplaceContract);
+                await listNFTonMarket(tokenId, parsedAmount, 0);
             }
 
         } catch (error) {
@@ -217,10 +217,14 @@ export const MarketplaceProvider = ({ children }) => {
 
         const marketplaceContract = await getEthereumContract();
         console.log(currentAccount);
-        const user = await marketplaceContract.idToUser(currentAccount);
+        const data = await marketplaceContract.idToUser(currentAccount);
 
-        console.log(user);
-        if (!user.userCreated) {
+        console.log(data);
+        setUser({
+            name: data.name,
+            imageURL: data.imageURL
+        });
+        if (!data.userCreated) {
             navigate('/create/user');
         }
     };
@@ -242,6 +246,28 @@ export const MarketplaceProvider = ({ children }) => {
         console.log(temp);
     };
 
+    const getUserInfo = async (userAddress) => {
+        if (!ethereum) return alert("Please install Metamask");
+
+        const marketplaceContract = await getEthereumContract();
+
+        const user = await marketplaceContract.idToUser(userAddress);
+
+        console.log("userInfo",user);
+        return user;
+    };
+
+    const getCollectionInfo = async (collectionId) => {
+        if (!ethereum) return alert("Please install Metamask");
+
+        const marketplaceContract = await getEthereumContract();
+
+        const col = await marketplaceContract.idToCollectionData(collectionId);
+
+        console.log("collectionInfo",col, collectionId);
+        return col;
+    };
+
 
 
     useEffect(() => {
@@ -253,9 +279,11 @@ export const MarketplaceProvider = ({ children }) => {
     return (
         <MarketplaceContext.Provider
             value={{
+                user,
                 itemDetails,
                 setItemDetails,
                 createItem,
+                listNFTonMarket,
                 fetchNFTs,
                 uploadStatus,
                 createCollection,
@@ -263,7 +291,9 @@ export const MarketplaceProvider = ({ children }) => {
                 getSingleCollection,
                 getSingleNFT,
                 buyNFT,
-                createUser
+                createUser,
+                getUserInfo,
+                getCollectionInfo
             }}>
             {children}
         </MarketplaceContext.Provider>

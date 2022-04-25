@@ -1,34 +1,57 @@
-import React,{useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 import { MarketplaceContext } from "../context/MarketplaceContext";
 import axios from "axios";
 import "./Singlenft.css";
 import { useParams } from "react-router-dom";
 import { ethers } from "ethers";
+import { WalletContext } from "../context/WalletContext";
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 
 const nftAbout = () => {
-  const [details , setDetails] = useState(true);
+  const [details, setDetails] = useState(true);
   const [NFTData, setNFTData] = useState();
   const [metadata, setMetadata] = useState();
-  const [bid , setBid] = useState(false);
-  const [history , setHistory] = useState(false);
-  const {nftId} = useParams();
-  const {getSingleNFT, buyNFT} = useContext(MarketplaceContext);
+  const [bid, setBid] = useState(false);
+  const [history, setHistory] = useState(false);
+
+  const { nftId } = useParams();
+  const [creator, setCreator] = useState();
+  const [owner, setOwner] = useState();
+  const [collection, setCollection] = useState();
+
+  const { listNFTonMarket, getSingleNFT, buyNFT, user, getUserInfo, getCollectionInfo } = useContext(MarketplaceContext);
+  const { currentAccount } = useContext(WalletContext);
+
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+  const [listingPrice, setListingPrice] = useState();
+
+  function handleChange(e) {
+    setListingPrice(e.target.value);
+  }
 
   const buyNow = async () => {
-    console.log("wrgv");
     await buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16));
   };
 
-  useEffect( async () => {
-      const token = await getSingleNFT(nftId);
-      console.log(token);
-      setNFTData(token);
+  useEffect(async () => {
+    const token = await getSingleNFT(nftId);
+    console.log(token);
+    setNFTData(token);
 
-    axios.get("https://ipfs.io/ipfs/" + token.tokenURI).then((res) => {
+    setCreator(await getUserInfo(token.creator));
+    setOwner(await getUserInfo(token.owner));
+    setCollection(await getCollectionInfo(parseInt(token.collectionId, 16)));
+
+
+    axios.get(token.tokenURI).then((res) => {
       console.log(res.data);
-      setMetadata(res.data); 
+      setMetadata(res.data);
     }).catch((err) => {
       console.log(err);
     })
@@ -39,7 +62,7 @@ const nftAbout = () => {
       {metadata ? <div className="flex flex-col lg:flex-row image-div ">
         <div>
           <img
-            className="image  lg:mx-60 w-80 h-116 pt-6 pb-8 pr-6 pl-6 rounded-[50px]  "
+            className="image lg:mx-60 w-96 h-96 pt-6 pb-8 pr-6 pl-6 rounded-[50px]  "
             src={metadata.image}
           ></img>
         </div>
@@ -51,8 +74,7 @@ const nftAbout = () => {
             On sale for <span className="span-color">{ethers.utils.formatEther(NFTData.price)} MATIC</span>
           </p>
           <h3 className="text-lg text-white pt-4 pr-4">
-            I love this image so much. But, to matter is just the first step. We
-            have a long way to go.
+            {metadata.description}
           </h3>
           <div className="flex flex-row">
             <div>
@@ -62,9 +84,9 @@ const nftAbout = () => {
               <div className="flex ">
                 <img
                   className="shrink-0 h-10 w-10 rounded-full mt-1"
-                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjExMjE3Mjk4MDg2NDAiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSJyZ2IoMjU1LCA2MCwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDI1NSwgNjApIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCMxMTIxNzI5ODA4NjQwKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
+                  src={creator.imageURL}
                 ></img>
-                <h3 className="text-white pt-3 pl-1">Missan Harirman</h3>
+                <h3 className="text-white pt-3 pl-1">{creator.name}</h3>
               </div>
               <div>
                 <ul
@@ -106,11 +128,11 @@ const nftAbout = () => {
                     <hr />
 
                     <h1 className="text-gray-400 pt-5">Owner</h1>
-                    <img
+                    {owner.name ? <div><img
                       className="shrink-0 h-10 w-10 rounded-full mt-1"
-                      src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjExMjE3Mjk4MDg2NDAiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSJyZ2IoMjU1LCA2MCwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDI1NSwgNjApIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCMxMTIxNzI5ODA4NjQwKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
+                      src={owner.imageURL}
                     ></img>
-                    <h3 className="text-white pt-3 pl-1">Missan Harirman</h3>
+                      <h3 className="text-white pt-3 pl-1">{owner.name}</h3></div> : <h1 className="text-white">Owned by Marketplace Contract 📃</h1>}
                     <div className="mb-4">
                       <h1 className="text-gray-500 mt-4 ">Properties</h1>
                       <hr />
@@ -119,7 +141,7 @@ const nftAbout = () => {
                     <div className="  ">
                       <button className="mt-4 border-2 border-gray-500 rounded-xl ">
                         <h1 className="text-blue-600 px-14">Artist</h1>
-                        <h1 className="text-white">Misan Harirman</h1>
+                        <h1 className="text-white">{creator.name}</h1>
                         <h1 className="text-gray-500 text-sm">91.33% rarity</h1>
                       </button>
                     </div>
@@ -146,7 +168,7 @@ const nftAbout = () => {
                     src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSIgaWQ9IjExMjE3Mjk4MDg2NDAiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSJyZ2IoMjU1LCA2MCwgMCkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0icmdiKDAsIDI1NSwgNjApIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCMxMTIxNzI5ODA4NjQwKSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIj48L3JlY3Q+CiAgPC9nPgo8L3N2Zz4="
                   ></img>
                   <div className="flex-col">
-                    <h3 className="text-gray-500  pl-1">Listed for <span className="span-color"> 6 MATIC</span></h3>
+                    <h3 className="text-gray-500  pl-1">{NFTData.isListed ? `Listed for ${ethers.utils.formatEther(NFTData.price)} MATIC` : "Not listed on marketplace yet"}</h3>
                     <p className="text-gray-500  pl-1">by <span className="span-color">Misan Harriman</span>  3/16/2022, 3:36 AM</p>
                   </div>
                 </div>
@@ -155,25 +177,36 @@ const nftAbout = () => {
 
             <div>
               <h3 className="text-gray-400 pl-20 pt-7">Collection</h3>
-              <div className="flex pt-1 pl-16">
+              {collection.name ? <div className="flex pt-1 pl-16">
                 <img
                   className="shrink-0 h-12 w-12 rounded-full"
-                  src="https://img.rarible.com/prod/image/upload/t_avatar_big/prod-collections/0x2b4307153072ac60dbe6100e7d4e8d61834d16cc/avatar/QmNgVPQsp7b2hbdXAcJbx5WvTvexeJLMxt3sL8ZQ158721"
+                  src={collection.imageURL}
                 ></img>
-                <h3 className="text-white pt-3 pl-1">The Purpose Of Light.</h3>
-              </div>
+                <h3 className="text-white pt-3 pl-1">{collection.name}</h3>
+              </div> : <h1 className="text-white">Not added to any collection yet.</h1>}
             </div>
 
 
 
           </div>
-          
-          {!NFTData.isListed ? <div className="mt-12 flex pb-3">
-            <div onClick={() => {buyNow()}}>
-              <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">Buy now</div>
+
+          {!NFTData.isListed && NFTData.owner.toLowerCase() === currentAccount.toLowerCase() ? <div className="mt-12 flex pb-3">
+            <div onClick={onOpenModal}>
+              <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">List now</div>
             </div>
-            <div className="mx-28 ">
-              <div className=" flex bg-blue-700 text-white font-bold rounded-full px-8 py-1">Place a bid</div>
+            <Modal open={open} onClose={onCloseModal} center closeIcon={<AiOutlineCloseCircle size={26} />}>
+              <label for="price" className="block text-sm text-white font-bold mb-2 mt-5">Price</label>
+              <input onChange={handleChange} className="shadow appearance-none border rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" type="number" placeholder="Item Price" />
+            
+              <button onClick={() => { listNFTonMarket(NFTData.tokenId, ethers.utils.parseEther(listingPrice), NFTData.collectionId)}} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">List NFT</button>
+            
+            </Modal>
+          </div> : <></>}
+
+
+          {NFTData.isListed && NFTData.seller.toLowerCase() !== currentAccount.toLowerCase() ? <div className="mt-12 flex pb-3">
+            <div onClick={() => { buyNow() }}>
+              <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">Buy now</div>
             </div>
           </div> : <></>}
           <div>
@@ -183,9 +216,9 @@ const nftAbout = () => {
 
 
       </div> : <></>}
-      
+
     </div>
-    
+
   );
 };
 export default nftAbout;
