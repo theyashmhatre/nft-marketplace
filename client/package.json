@@ -17,7 +17,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
+    "react-responsive-modal": "^6.2.0",
     "react-router-dom": "^6.2.2",
+    "reactjs-popup": "^2.0.5",
     "run": "^1.4.0"
   },
   "devDependencies": {
