@@ -3,7 +3,6 @@ import { Navbar, Welcome, Services, Footer, Transactions, Section } from './comp
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Singlenft from './components/Singlenft';
-import Singlecollection from './components/SingleCollection';
 import CreateNFT from './components/Create/CreateNFT/CreateNFT';
 import ProfileSection from './components/ProfileSection/profileSection';
 import Create from './components/Create/Create';
@@ -11,6 +10,8 @@ import CreateCollection from './components/Create/CreateCollection/CreateCollect
 import CreateUser from './components/Create/CreateUser/CreateUser';
 import { WalletProvider } from './context/WalletContext';
 import { MarketplaceProvider } from './context/MarketplaceContext';
+import SingleCollection from './components/SingleCollection';
+
 
 const App = () => {
 
@@ -31,7 +32,7 @@ const App = () => {
               <Route exact path='/create/user' element={<CreateUser />} />
               <Route exact path='/assets/:nftId' element={<Singlenft />} />
               <Route exact path='/Profile' element={<ProfileSection />} />
-              <Route exact path='/collection/:collectionId' element={< Singlecollection />} />
+              <Route exact path='/collection/:collectionId' element={< SingleCollection />} />
             </Routes>
             <Footer />
           </div>

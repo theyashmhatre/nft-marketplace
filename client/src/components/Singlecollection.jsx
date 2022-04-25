@@ -24,7 +24,7 @@ const SingleCollection = () => {
         <div className="mx-8">
           <div>
             <img
-              className="rounded-xl"
+              className="rounded-xl h-96 align-middle m-auto w-1/2"
               src={collectionData.imageURL}
             ></img>
             <div>
