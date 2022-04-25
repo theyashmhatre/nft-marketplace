@@ -22,6 +22,11 @@ export default function ProfileSection() {
     setNftList(nfts);
   }
 
+  const fetchOwned = async () => {
+    const i = nftList;
+
+  }
+
   const NoItems = () => {
     return (
       <>
@@ -95,6 +100,7 @@ export default function ProfileSection() {
                 setCollection(false);
                 setOnSale(false);
                 setBought(false);
+                fetchOwned();
               }
             }}>Owned</div>
             <div className={classNames(
@@ -123,11 +129,17 @@ export default function ProfileSection() {
             }}>Collection</button>
           </div>
           <div className=' w-full h-[0.25px] bg-gray-600 mt-5 nLPsul' />
-          <div className='mt-[40px] flex justify-between'>
+          <div className='mt-[40px] grid grid-cols-2 xl:grid-cols-3 gap-4'>
             {nftList ? <>
             {
               nftList.map((nft,index)=>{
-                return <div key={index}><Card props={nft} /></div>
+                if (onSale && nft.isListed && nft.owner === currentAccount) {
+                  console.log(nft.isListed);
+                    return <div key={index}><Card props={nft} /></div>;
+                } else if(owned && nft.owner === currentAccount){
+                  return <div key={index}><Card props={nft} /></div>;
+                } 
+                return 
               })
             }</> : <NoItems />}
           </div>

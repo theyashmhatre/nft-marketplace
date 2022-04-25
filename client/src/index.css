@@ -188,3 +188,58 @@ body {
 .fEdSMd {
   margin: 5px 18px 16px;
 }
+.hAjoXB {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  vertical-align: inherit;
+}
+.jeeEJR {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  font-family: inherit;
+  font-weight: 700;
+  vertical-align: inherit;
+}
+.iQeOnQ {
+  font-family: inherit;
+  font-weight: inherit;
+  color: rgb(255, 255, 255);
+  vertical-align: inherit;
+}
+.sViYF {
+  margin-left: 4px;
+}
+.jpclKj {
+  font-family: inherit;
+  font-weight: inherit;
+  color: rgb(140, 140, 140);
+  vertical-align: inherit;
+}
+.fhzJjE {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  min-height: 17px;
+  line-height: 17px;
+  color: rgb(140, 140, 140);
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+.bEOvQm {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: normal;
+}
+.bjByIS {
+  font-family: inherit;
+  font-weight: 700;
+  color: rgb(0, 102, 255);
+  vertical-align: inherit;
+  background: linear-gradient(126.49deg, rgb(0, 163, 255) 0%, rgb(0, 102, 255) 100%) text;
+}
