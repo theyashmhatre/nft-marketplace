@@ -9,10 +9,11 @@ import ListNft from './Modal/ModalContent/ListNft';
 
 export default function CreateNFT() {
 
-  const { itemDetails, setItemDetails, createItem, fetchNFTs, uploadStatus } = useContext(MarketplaceContext);
-  const {isChainValid} = useContext(WalletContext);
+  const { itemDetails, setItemDetails, createItem, fetchNFTs, getAllCollections } = useContext(MarketplaceContext);
+  const {isChainValid, currentAccount} = useContext(WalletContext);
   const [submit, setSubmit] = useState(false);
   const [listNft, setListNft] = useState(false);
+  const [collectionList, setCollectionList] = useState([]);
 
   function handleChange(e) {
     const value = e.target.value;
@@ -51,7 +52,7 @@ export default function CreateNFT() {
     e.preventDefault();
     setSubmit(true);
 
-    createItem(listNft);
+    createItem(listNft, value);
   };
 
   const closeModal = () => {
@@ -60,7 +61,20 @@ export default function CreateNFT() {
       image: { preview: "", raw: "", visible: false, file: '' }, name: "", extlink: "", description: "", price: ""
     });
   }; 
+
+
+
+  const [value, setValue] = useState(0);
+
+  const handleSelectChange = (e) => {
+    setValue(e.target.value);
+    console.log(e.target.value);
+  };
   
+  useEffect(async () => {
+    const allCollections = await getAllCollections();
+    setCollectionList(allCollections);
+  }, []);
 
 
   return (
@@ -100,6 +114,21 @@ export default function CreateNFT() {
 
           <label for="description" className="block mb-2 text-sm text-white font-bold mt-5">Description</label>
           <textarea name="description" onChange={handleChange} id="description" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Provide a detailed description of your item."></textarea>
+
+          {collectionList.length ? 
+          <div>
+          <label for="description" className="block mb-2 text-sm text-white font-bold mt-5">Add to Collection</label>
+            <select id="dropdown" value={value} onChange={handleSelectChange} className="w-1/2 h-8">
+              <option value="N/A">N/A</option>
+              {collectionList.filter((collection) => {
+                return collection.createdBy.toLowerCase() === currentAccount;
+              })
+              .map((collection) => {
+                return (
+                    <option value={collection.collectionId}>{collection.name}</option>
+                );
+              })}
+            </select></div> : <></>}
 
           {/* Toggle Button */}
           <div class="flex w-full my-12 mx-5">

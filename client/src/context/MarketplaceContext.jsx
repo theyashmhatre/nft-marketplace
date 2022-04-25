@@ -95,7 +95,7 @@ export const MarketplaceProvider = ({ children }) => {
 
 
     //Creating NFT
-    const createItem = async (listNft) => {
+    const createItem = async (listNft, collectionId) => {
         try {
             if (!ethereum) return alert("Please install Metamask");
 
@@ -104,9 +104,9 @@ export const MarketplaceProvider = ({ children }) => {
 
             const uri = await storeNFTonIPFS();
 
-            const parsedAmount = price ? ethers.utils.parseEther(price) : ethers.utils.parseEther(0.1);
+            const parsedAmount = price ? ethers.utils.parseEther(price) : ethers.utils.parseEther("0.1");
 
-            const mintHash = await marketplaceContract.createToken(uri, parsedAmount, 0);
+            const mintHash = await marketplaceContract.createToken(uri, parsedAmount, collectionId);
             console.log(mintHash);
 
             handleChange("transactionApproved");
@@ -121,7 +121,7 @@ export const MarketplaceProvider = ({ children }) => {
             handleChange("nftCreated");
 
             if (listNft) {
-                await listNFTonMarket(tokenId, parsedAmount, 0);
+                await listNFTonMarket(tokenId, parsedAmount, collectionId);
             }
 
         } catch (error) {
@@ -156,6 +156,8 @@ export const MarketplaceProvider = ({ children }) => {
 
         console.log(collections);
         setALLCollections(collections);
+
+        return collections;
 
     };
 
@@ -204,10 +206,11 @@ export const MarketplaceProvider = ({ children }) => {
             if (!ethereum) return alert("Please install Metamask");
 
             const marketplaceContract = await getEthereumContract();
-            const myNFTs = await marketplaceContract.fetchAllNFTs();
-            return myNFTs;
+            const myNFTs = await marketplaceContract.fetchMarketItems();
+
+            console.log(myNFTs);
         } catch (error) {
-            throw('cannot get all nfts');
+
         }
     };
 
@@ -287,6 +290,7 @@ export const MarketplaceProvider = ({ children }) => {
                 uploadStatus,
                 createCollection,
                 allCollections,
+                getAllCollections,
                 getSingleCollection,
                 getSingleNFT,
                 buyNFT,
