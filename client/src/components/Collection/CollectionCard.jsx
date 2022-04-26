@@ -14,7 +14,7 @@ export default function CollectionCard({ collection }) {
                     src={collection.imageURL}
                 ></img>
                 <div>
-                    <h1 className="text-lg font-bold  pl-2">
+                    <h1 className="text-lg text-white font-bold  pl-2">
                         {collection.name}
                     </h1>
                     <p className="pl-2 text-gray-400">${internationalNumberFormat.format(Math.floor(Math.random() * (1000000 - 1000 + 1)) + 1000)}</p>
