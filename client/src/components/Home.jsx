@@ -8,7 +8,7 @@ import { MarketplaceContext } from '../context/MarketplaceContext';
 
 export default function Home() {
 
-  const {allCollections} = useContext(MarketplaceContext);
+  const {allCollections, fetchNFTs} = useContext(MarketplaceContext);
 
   return (
     <div>
@@ -19,6 +19,7 @@ export default function Home() {
         <Transactions />
         <NftSection 
             allCollections = {allCollections}
+            allnfts={fetchNFTs}
         />
         
     </div>

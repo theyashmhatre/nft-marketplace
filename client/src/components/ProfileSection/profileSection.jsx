@@ -39,7 +39,7 @@ export default function ProfileSection() {
           )}>
             <span className={classNames(
               'font-bold text-[26px]'
-            )}>No items found</span>
+            )}>No more items found</span>
             <span className={classNames(
               'text-[#828282] text-[18px] mt-1'
             )}>Come back soon! Or try to browse something for you on our marketplace</span>

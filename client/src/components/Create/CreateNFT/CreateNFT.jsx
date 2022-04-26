@@ -6,6 +6,7 @@ import {ImageUpload, MetadataUpload, TransactionApprove, NFTCreate} from './Moda
 import { WalletContext } from '../../../context/WalletContext';
 import Modal from './Modal/Modal';
 import ListNft from './Modal/ModalContent/ListNft';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateNFT() {
 
@@ -14,6 +15,7 @@ export default function CreateNFT() {
   const [submit, setSubmit] = useState(false);
   const [listNft, setListNft] = useState(false);
   const [collectionList, setCollectionList] = useState([]);
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const value = e.target.value;
@@ -60,6 +62,7 @@ export default function CreateNFT() {
     setItemDetails({
       image: { preview: "", raw: "", visible: false, file: '' }, name: "", extlink: "", description: "", price: ""
     });
+    navigate("/profile");
   }; 
 
 

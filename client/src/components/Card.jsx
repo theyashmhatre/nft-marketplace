@@ -36,7 +36,7 @@ const Card = ({ props }) => {
           )}>
             <span className={classNames(
               'font-bold text-[26px]'
-            )}>No items found</span>
+            )}>No more items found</span>
             <span className={classNames(
               'text-[#828282] text-[18px] mt-1'
             )}>Come back soon! Or try to browse something for you on our marketplace</span>
@@ -56,7 +56,7 @@ const Card = ({ props }) => {
   return (
     <>
     {loading ? <NoItems /> :  
-      <div className="border-2 rounded-2xl mx-auto mb-3 dNsYU min-w-[269px]">
+      <div className="border-2 rounded-2xl mx-auto mb-3 max-w-[270px] dNsYU min-w-[269px]">
       <div className={classNames(
           'hKPgxQ'
         )}>

@@ -7,7 +7,7 @@ export default function CollectionCard({ collection }) {
     const collectionId = parseInt(collection.collectionId._hex, 16);
 
     return (
-        <Link to={`/collection/${collectionId}`}>
+        <Link className='max-h-[52px]' to={`/collection/${collectionId}`}>
             <div className="flex">
                 <img
                     className="rounded-full w-12 h-12"
