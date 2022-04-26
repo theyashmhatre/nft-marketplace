@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ props }) => {
   console.log(props);
@@ -73,11 +74,12 @@ const Card = ({ props }) => {
             src={image}
             alt=""
           />
-        <div className="sc-bdvvtL sc-gsDKAQ sc-dpAhYB sc-kMyqmI ieSfBq jrDvel jiNilR">
-          <a href="/token/0xdd991ec0a7cd7c7334e3e4553aa5e4fb850168d9:10165"
-            className="cKmyUG">{title}</a>
-          <img src="https://rarible.com/9b703a21b9f93a1f0065.svg" className="h-[24px] w-[24px]" />
-        </div>
+        <Link to={`assets/${props.tokenId}`}>
+            <div className="sc-bdvvtL sc-gsDKAQ sc-dpAhYB sc-kMyqmI ieSfBq jrDvel jiNilR">
+              <h1 className="cKmyUG">{title}</h1>
+              <img src="https://rarible.com/9b703a21b9f93a1f0065.svg" className="h-[24px] w-[24px]" />
+            </div>
+        </Link>
         <div className="fEdSMd">
           <span className="hAjoXB">
             <span className="jeeEJR">

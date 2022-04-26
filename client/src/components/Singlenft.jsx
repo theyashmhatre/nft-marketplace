@@ -3,12 +3,14 @@ import classNames from "classnames";
 import { MarketplaceContext } from "../context/MarketplaceContext";
 import axios from "axios";
 import "./Singlenft.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ethers } from "ethers";
 import { WalletContext } from "../context/WalletContext";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import Loader from "./Loader";
+import { FaSpinner } from "react-icons/fa";
 
 
 const nftAbout = () => {
@@ -17,11 +19,14 @@ const nftAbout = () => {
   const [metadata, setMetadata] = useState();
   const [bid, setBid] = useState(false);
   const [history, setHistory] = useState(false);
+  const navigate = useNavigate();
 
   const { nftId } = useParams();
   const [creator, setCreator] = useState();
   const [owner, setOwner] = useState();
   const [collection, setCollection] = useState();
+  const [isBuying, setIsBuying] = useState(false);
+  const [isListing, setIsListing] = useState(false);
 
   const { listNFTonMarket, getSingleNFT, buyNFT, user, getUserInfo, getCollectionInfo } = useContext(MarketplaceContext);
   const { currentAccount } = useContext(WalletContext);
@@ -36,7 +41,10 @@ const nftAbout = () => {
   }
 
   const buyNow = async () => {
-    await buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16));
+    setIsBuying(true);
+    buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16)).then(() => {
+      setIsBuying(false);
+    });
   };
 
   useEffect(async () => {
@@ -171,23 +179,20 @@ const nftAbout = () => {
           </div>
 
           {!NFTData.isListed && NFTData.owner.toLowerCase() === currentAccount.toLowerCase() ? <div className="mt-12 flex pb-3">
-            <div onClick={onOpenModal}>
-              <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">List now</div>
-            </div>
+
+            <button onClick={onOpenModal} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">List Now</button>
             <Modal open={open} onClose={onCloseModal} center closeIcon={<AiOutlineCloseCircle size={26} />}>
               <label for="price" className="block text-sm text-white font-bold mb-2 mt-5">Price</label>
               <input onChange={handleChange} className="shadow appearance-none border rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" type="number" placeholder="Item Price" />
             
-              <button onClick={() => { listNFTonMarket(NFTData.tokenId, ethers.utils.parseEther(listingPrice), NFTData.collectionId)}} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">List NFT</button>
+              <button onClick={() => { setIsListing(true); listNFTonMarket(NFTData.tokenId, ethers.utils.parseEther(listingPrice), NFTData.collectionId).then(() => { setIsListing(false); onCloseModal(); navigate("/profile") }) }} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isListing ? <FaSpinner /> : "List NFT"}</button>
             
             </Modal>
           </div> : <></>}
 
 
           {NFTData.isListed && NFTData.seller.toLowerCase() !== currentAccount.toLowerCase() ? <div className="mt-12 flex pb-3">
-            <div onClick={() => { buyNow() }}>
-              <div className="bg-blue-700 text-white font-bold rounded-full px-8 py-1">Buy now</div>
-            </div>
+            <button onClick={buyNow} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isBuying ? <FaSpinner /> : "Buy Now"}</button>
           </div> : <></>}
           <div>
 
