@@ -7,6 +7,7 @@ import { WalletContext } from '../../../context/WalletContext';
 import Modal from './Modal/Modal';
 import ListNft from './Modal/ModalContent/ListNft';
 import { useNavigate } from 'react-router-dom';
+import AddToCollection from './Modal/ModalContent/AddToCollection';
 
 export default function CreateNFT() {
 
@@ -14,6 +15,7 @@ export default function CreateNFT() {
   const {isChainValid, currentAccount} = useContext(WalletContext);
   const [submit, setSubmit] = useState(false);
   const [listNft, setListNft] = useState(false);
+  const [addToCollection, setAddToCollection] = useState(false);
   const [collectionList, setCollectionList] = useState([]);
   const navigate = useNavigate();
 
@@ -72,6 +74,7 @@ export default function CreateNFT() {
   const handleSelectChange = (e) => {
     setValue(e.target.value);
     console.log(e.target.value);
+    setAddToCollection(true);
   };
   
   useEffect(async () => {
@@ -184,6 +187,9 @@ export default function CreateNFT() {
 
                   {/* Listing NFT on Market*/}
                   {listNft && <ListNft />}
+
+                  {/* Adding NFT to a colletion*/}
+                  {addToCollection && <AddToCollection />}
                 
                 </div>
 

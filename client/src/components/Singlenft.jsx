@@ -11,6 +11,9 @@ import { Modal } from 'react-responsive-modal';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Loader from "./Loader";
 import { FaSpinner } from "react-icons/fa";
+import { TransactionApprove } from "./Create/CreateNFT/Modal/ModalContent";
+import BuyingNFT from "./Create/CreateNFT/Modal/ModalContent/BuyingNFT";
+import ListingNFT from "./Create/CreateNFT/Modal/ModalContent/ListingNFT";
 
 
 const nftAbout = () => {
@@ -41,10 +44,15 @@ const nftAbout = () => {
   }
 
   const buyNow = async () => {
-    setIsBuying(true);
-    buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16)).then(() => {
-      setIsBuying(false);
-    });
+    const res = await buyNFT(parseFloat(NFTData.price, 16), parseInt(NFTData.tokenId, 16));
+
+    console.log("res",res);
+  };
+
+  const listNow = async () => {
+    setIsListing(true);
+    onCloseModal();
+    await listNFTonMarket(NFTData.tokenId, ethers.utils.parseEther(listingPrice), NFTData.collectionId);
   };
 
   useEffect(async () => {
@@ -64,6 +72,10 @@ const nftAbout = () => {
       console.log(err);
     })
   }, []);
+
+  const closeModal = () => {
+    setIsBuying(false);
+  }; 
 
   return (
     <div className="bg-black ">
@@ -87,7 +99,7 @@ const nftAbout = () => {
           <div className="flex flex-row">
             <div>
               <h3 className="text-lg text-white pt-7">
-                Creator <span className="text-gray-400">10% royalties</span>
+                Creator
               </h3>
               <div className="flex ">
                 <img
@@ -139,7 +151,7 @@ const nftAbout = () => {
                         className="pb-2"
                         src="https://rarible.com/9b703a21b9f93a1f0065.svg"
                       ></img>
-                      <h1 className="text-white  px-2 ">Ethereum</h1>
+                      <h1 className="text-white  px-2 ">Polygon</h1>
                     </div>
                   </div>
                 </div>
@@ -185,18 +197,66 @@ const nftAbout = () => {
               <label for="price" className="block text-sm text-white font-bold mb-2 mt-5">Price</label>
               <input onChange={handleChange} className="shadow appearance-none border rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" type="number" placeholder="Item Price" />
             
-              <button onClick={() => { setIsListing(true); listNFTonMarket(NFTData.tokenId, ethers.utils.parseEther(listingPrice), NFTData.collectionId).then(() => { setIsListing(false); onCloseModal(); navigate("/profile") }) }} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isListing ? <FaSpinner /> : "List NFT"}</button>
+              <button onClick={listNow} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isListing ? <FaSpinner /> : "List NFT"}</button>
             
             </Modal>
           </div> : <></>}
 
 
           {NFTData.isListed && NFTData.seller.toLowerCase() !== currentAccount.toLowerCase() ? <div className="mt-12 flex pb-3">
-            <button onClick={buyNow} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isBuying ? <FaSpinner /> : "Buy Now"}</button>
+            <button onClick={()=> {setIsBuying(true); buyNow();}} type="button" className="text-white mb-10 mt-7 block bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-md px-7 py-2.5 text-center mr-2">{isBuying ? <FaSpinner /> : "Buy Now"}</button>
           </div> : <></>}
-          <div>
+          {isBuying ? (
+            <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-          </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg">
+                  <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-flow-row gap-5">
+
+
+                    {/* Approving and Buying NFT */}
+                    <BuyingNFT />
+
+
+                  </div>
+
+                  <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={closeModal}>Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          ) : <></>}
+
+          {isListing ? (
+            <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg">
+                  <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-flow-row gap-5">
+
+
+                    {/* Approving and Listing NFT */}
+                    <ListingNFT />
+
+
+                  </div>
+
+                  <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => {setIsListing(false)}}>Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          ) : <></>}
         </div>
 
 

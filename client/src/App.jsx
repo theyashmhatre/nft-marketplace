@@ -10,7 +10,7 @@ import CreateCollection from './components/Create/CreateCollection/CreateCollect
 import CreateUser from './components/Create/CreateUser/CreateUser';
 import { WalletProvider } from './context/WalletContext';
 import { MarketplaceProvider } from './context/MarketplaceContext';
-import SingleCollection from './components/SingleCollection';
+import SingleCollection from './components/Singlecollection';
 
 
 const App = () => {

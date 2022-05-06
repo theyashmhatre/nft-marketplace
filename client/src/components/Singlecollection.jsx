@@ -1,6 +1,8 @@
+import classNames from "classnames";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MarketplaceContext } from "../context/MarketplaceContext";
+import Card from "./Card";
 import NFTCard from "./NFT/NFTCard";
 
 const SingleCollection = () => {
@@ -16,6 +18,33 @@ const SingleCollection = () => {
     setCollectionItems(data[0]);
     setCollectionData(data[1]);
   }, []);
+
+  const NoItems = () => {
+    return (
+      <>
+        <div className="flex flex-col mx-auto py-[60px]">
+          <div className={classNames(
+            "flex flex-col text-white",
+            'max-w-[360px] mx-auto text-center',
+          )}>
+            <span className={classNames(
+              'font-bold text-[26px]'
+            )}>No more items found</span>
+            <span className={classNames(
+              'text-[#828282] text-[18px] mt-1'
+            )}>Come back soon! Or try to browse something for you on our marketplace</span>
+            <div className="mt-[16px]">
+              <a href="" className="">
+                <button type="button" className="bNwIlU mx-auto">
+                  Browse marketplace
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
 
 
   return (
@@ -109,17 +138,17 @@ const SingleCollection = () => {
             Collections
           </h1>
         </div>
-        <div className="pt-8">
+        <div className="pt-8 pb-20">
           <div className="grid lg:grid-cols-4 lg:grid-row-5  grid-cols-1 grid-row-12">
 
-            {collectionItems.map((nft, i) => {
+            { collectionItems.length ? collectionItems.map((nft, i) => {
               return (
-                <NFTCard
+                <Card
                   key={i}
-                  nft={nft}
+                  props={nft}
                 />
               )
-            })}
+            }) : <NoItems />}
             
           </div>
         </div>

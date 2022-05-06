@@ -10,7 +10,7 @@ export default function NFTCard({nft}) {
     const [NFTData, setNFTData] = useState();
 
     useEffect(() => {
-      axios.get("https://ipfs.io/ipfs/" + nft.tokenURI).then((res) => {
+      axios.get(nft.tokenURI).then((res) => {
           console.log(res);
           setNFTData(res.data);
       }).catch((err) => {

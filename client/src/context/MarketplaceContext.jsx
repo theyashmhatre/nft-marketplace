@@ -32,13 +32,18 @@ export const MarketplaceProvider = ({ children }) => {
 
     const [allCollections, setALLCollections] = useState([]);
     const [itemDetails, setItemDetails] = useState({ image: { preview: "", raw: "", visible: false, file: '' }, name: "", extlink: "", description: "", price: "" });
-    const [user, setUser] = useState({name: "", imageURL: ""});
+    const [user, setUser] = useState({ name: "", imageURL: "" });
     const [uploadStatus, setUploadStatus] = useState({
         imageUploaded: false,
         metadataUploaded: false,
         transactionApproved: false,
+        transactionRejected: false,
         nftListed: false,
-        nftCreated: false
+        nftCreated: false,
+        boughtNFT: false,
+        addedToCollection: false,
+        collectionCreated: false,
+        userCreated: false
     });
 
     function handleChange(name) {
@@ -50,6 +55,7 @@ export const MarketplaceProvider = ({ children }) => {
 
     const storeImage = async (image) => {
         const fileCid = await client.storeBlob(new Blob([image.file]));
+        handleChange("imageUploaded");
 
         return "https://ipfs.io/ipfs/" + fileCid;
     };
@@ -59,7 +65,7 @@ export const MarketplaceProvider = ({ children }) => {
     const storeNFTonIPFS = async () => {
 
         const fileUrl = await storeImage(itemDetails.image);
-        handleChange("imageUploaded");
+
 
         const nftData = {
             "name": itemDetails.name,
@@ -83,10 +89,29 @@ export const MarketplaceProvider = ({ children }) => {
             if (!ethereum) return alert("Please install Metamask");
             const marketplaceContract = await getEthereumContract();
 
-            const listingHash = await marketplaceContract.createMarketItem(tokenId, price, collectionId);
+            marketplaceContract.createMarketItem(tokenId, price, collectionId).then( async (res) => {
+                handleChange("transactionApproved");
+                await res.wait();
 
-            await listingHash.wait();
-            handleChange("nftListed");
+                handleChange("nftListed");
+            }).catch((err) => {
+                handleChange("transactionRejected");
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const addToCollection = async (tokenId, collectionId) => {
+        try {
+            if (!ethereum) return alert("Please install Metamask");
+            const marketplaceContract = await getEthereumContract();
+
+            const hash = await marketplaceContract.addToCollection(tokenId, collectionId);
+
+            await hash.wait();
+            handleChange("addedToCollection");
 
         } catch (error) {
             console.log(error);
@@ -106,23 +131,32 @@ export const MarketplaceProvider = ({ children }) => {
 
             const parsedAmount = price ? ethers.utils.parseEther(price) : ethers.utils.parseEther("0.1");
 
-            const mintHash = await marketplaceContract.createToken(uri, parsedAmount, collectionId);
-            console.log(mintHash);
+            marketplaceContract.createToken(uri, parsedAmount, collectionId).then(async (mintHash) => {
+                console.log(mintHash);
 
-            handleChange("transactionApproved");
-            const rc = await mintHash.wait();
+                handleChange("transactionApproved");
+                const rc = await mintHash.wait();
 
-            const event = rc.events.find(event => event.event === 'Transfer');      //getting tokenId value returned from the call
-            let [from, to, tokenId] = event.args;
-            console.log(from, to, tokenId);
+                const event = rc.events.find(event => event.event === 'Transfer');      //getting tokenId value returned from the call
+                let [from, to, tokenId] = event.args;
+                console.log(from, to, tokenId);
 
-            tokenId = parseInt(tokenId._hex, 16);
-            console.log(tokenId);
-            handleChange("nftCreated");
+                tokenId = parseInt(tokenId._hex, 16);
+                console.log(tokenId);
+                handleChange("nftCreated");
 
-            if (listNft) {
-                await listNFTonMarket(tokenId, parsedAmount, collectionId);
-            }
+                if (listNft) {
+                    await listNFTonMarket(tokenId, parsedAmount, collectionId);
+                }
+
+                if (collectionId) {
+                    await addToCollection(tokenId, collectionId);
+                }
+            }).catch((err) => {
+                console.log(err);
+                handleChange("transactionRejected");
+            });
+
 
         } catch (error) {
             console.log(error);
@@ -141,9 +175,17 @@ export const MarketplaceProvider = ({ children }) => {
 
         const marketplaceContract = await getEthereumContract();
 
-        const temp = await marketplaceContract.createCollection(name, description, fileUrl);
+        const temp = await marketplaceContract.createCollection(name, description, fileUrl).then(async (res) => {
+            handleChange("transactionApproved");
+            await res.wait();
 
-        console.log(temp);
+            handleChange("collectionCreated");
+
+        }).catch((err) => {
+            handleChange("transactionRejected");
+        })
+
+
 
 
     };
@@ -186,6 +228,7 @@ export const MarketplaceProvider = ({ children }) => {
 
     const buyNFT = async (price, id) => {
         const value = ethers.utils.formatEther(price.toString());
+        console.log(value);
 
         if (!ethereum) return alert("Please install Metamask");
 
@@ -193,10 +236,14 @@ export const MarketplaceProvider = ({ children }) => {
 
         const options = { value: ethers.utils.parseEther(value) };
         console.log(options);
-        const res = await marketplaceContract.createMarketSale(id, options);
-
-        console.log(res);
-
+        marketplaceContract.createMarketSale(id, options).then(async (res) => {
+            handleChange("transactionApproved");
+            await res.wait();
+            handleChange("boughtNFT");
+        }).catch((err) => {
+            console.log(err);
+            handleChange("transactionRejected");
+        });
     };
 
     const fetchNFTs = async () => {
@@ -241,13 +288,16 @@ export const MarketplaceProvider = ({ children }) => {
 
         const fileUrl = await storeImage(user.image);
 
-        console.log(fileUrl);
-
         const marketplaceContract = await getEthereumContract();
 
-        const temp = await marketplaceContract.createUser(name, fileUrl);
-
-        console.log(temp);
+        marketplaceContract.createUser(name, fileUrl).then(async (res) => {
+            handleChange("transactionApproved");
+            await res.wait();
+            handleChange("userCreated");
+        }).catch((err) => {
+            console.log(err);
+            handleChange("transactionRejected");
+        });
     };
 
     const getUserInfo = async (userAddress) => {
@@ -257,7 +307,7 @@ export const MarketplaceProvider = ({ children }) => {
 
         const user = await marketplaceContract.idToUser(userAddress);
 
-        console.log("userInfo",user);
+        console.log("userInfo", user);
         return user;
     };
 
@@ -268,7 +318,7 @@ export const MarketplaceProvider = ({ children }) => {
 
         const col = await marketplaceContract.idToCollectionData(collectionId);
 
-        console.log("collectionInfo",col, collectionId);
+        console.log("collectionInfo", col, collectionId);
         return col;
     };
 

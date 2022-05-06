@@ -40,7 +40,7 @@ const Welcome = () => {
             <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
                 <div className="flex flex-1 justify-start flex-col mf:mr-10">
                     <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1 ">
-                        Send Crypto <br /> across the world
+                        Send NFTs <br /> across the world
                     </h1>
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
                         Explore the crypto world. Buy and Sell cryptocurrencies easily on Krypto.
@@ -61,7 +61,7 @@ const Welcome = () => {
                             Security
                         </div>
                         <div className={`rounded-tr-2xl ${commonStyles}`}>
-                            Ethereum
+                            Polygon
                         </div>
                         <div className={`rounded-bl-2xl ${commonStyles}`}>
                             Web 3.0
@@ -93,7 +93,7 @@ const Welcome = () => {
                                     <MdOutlineContentCopy fontSize={15} className="mt-0.5 cursor-pointer" color="#fff" onClick={() => {navigator.clipboard.writeText(currentAccount)}} />
                                 </div>
                                 <p className="text-white font-semibold text-lg mt-1">
-                                    Ethereum
+                                    Polygon
                                 </p>
                             </div>
                         </div>

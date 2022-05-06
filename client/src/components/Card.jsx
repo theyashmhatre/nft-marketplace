@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ props }) => {
-  console.log(props);
   const price = ethers.utils.formatEther(props.price.toString());
   const [loading, setloading] = useState(true);
   const [image, setimage] = useState('https://img.rarible.com/prod/image/upload/t_image_preview/prod-itemImages/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b:11534/c5127bc9');
@@ -74,7 +73,7 @@ const Card = ({ props }) => {
             src={image}
             alt=""
           />
-        <Link to={`assets/${props.tokenId}`}>
+        <Link to={`/assets/${props.tokenId}`}>
             <div className="sc-bdvvtL sc-gsDKAQ sc-dpAhYB sc-kMyqmI ieSfBq jrDvel jiNilR">
               <h1 className="cKmyUG">{title}</h1>
               <img src="https://rarible.com/9b703a21b9f93a1f0065.svg" className="h-[24px] w-[24px]" />
@@ -84,7 +83,7 @@ const Card = ({ props }) => {
           <span className="hAjoXB">
             <span className="jeeEJR">
               <span className="iQeOnQ">
-                <span className="">{price} ETH</span>
+                <span className="">{price} MATIC</span>
               </span>
               <span className="sViYF">
                 <span className="jpclKj">1/1</span>
@@ -92,7 +91,7 @@ const Card = ({ props }) => {
             </span>
             <span className="fhzJjE">
               <button type="button" className="bEOvQm">
-                <span className="bjByIS">Buy now</span>
+                <span className="bjByIS">{props.isListed ? "Buy now": ""}</span>
               </button>
             </span>
           </span>

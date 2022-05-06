@@ -12,9 +12,8 @@ export default function ProfileSection() {
   const [owned, setOwned] = useState(false);
   const [collection, setCollection] = useState(false);
   const [bought, setBought] = useState(false);
-  const { fetchNFTs } = useContext(MarketplaceContext);
   const [nftList, setNftList] = useState([]);
-  const {allCollections} = useContext(MarketplaceContext);
+  const {fetchNFTs, allCollections, user} = useContext(MarketplaceContext);
   useEffect(async () => {
     fetchNft();
   }, [])
@@ -66,8 +65,8 @@ export default function ProfileSection() {
             "pt-[180px] flex justify-center align-bottom"
           )}>
             <img className={classNames(
-              "rounded-[50%]  border-2 border-black"
-            )} src="/images/bg.svg" alt="" />
+              "shrink-0 w-28 h-28 rounded-[50%] border-2 border-black"
+            )} src={user.imageURL} alt="" />
           </div>
         </div>
         <p className={classNames(
@@ -133,27 +132,31 @@ export default function ProfileSection() {
           <div className=' w-full h-[0.25px] bg-gray-600 mt-5 nLPsul' />
 
           {!nftList && !collection && <NoItems/>}
+
           <div className='mt-[40px] grid grid-cols-2 xl:grid-cols-3 gap-4'>
             {nftList && onSale && <>
               {
-                nftList.map((nft, index) => {
-                  if (nft.isListed) {
+                nftList.filter((nft) => {
+                  return nft.isListed && nft.seller.toLowerCase() === currentAccount.toLowerCase()
+                }).map((nft, index) => {
                     return <div key={index}><Card props={nft} /></div>;
-                  }
-                  return
                 })
               }
             </>}
             {nftList && owned && <>
               {
-                nftList.map((nft, index) => {
+                nftList.filter((nft) => {
+                  return nft.owner.toLowerCase() === currentAccount.toLowerCase()
+                }).map((nft, index) => {
                     return <div key={index}><Card props={nft} /></div>;
                 })
               }
             </>}
             {nftList && bought && <>
               {
-                nftList.map((nft, index) => {
+                nftList.filter((nft) => {
+                  return nft.sold && nft.owner.toLowerCase() === currentAccount.toLowerCase();
+                }).map((nft, index) => {
                   if (nft.sold) {
                     return <div key={index}><Card props={nft} /></div>;
                   }
@@ -163,7 +166,9 @@ export default function ProfileSection() {
               </>}
             {allCollections && collection && <>
               {
-                allCollections.map((nft, index) => {
+                allCollections.filter((collection) => {
+                  return collection.createdBy.toLowerCase() === currentAccount.toLowerCase()
+                }).map((nft, index) => {
                     return <div key={index}><CollectionCard
                     collection = {nft}
                   /></div>;
